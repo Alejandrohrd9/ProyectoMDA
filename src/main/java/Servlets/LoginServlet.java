@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
             System.out.println("correcto");
             response.sendRedirect("otrojsp.jsp");
         }else{
-            System.out.println("no");
+            response.sendRedirect("error.jsp");
         }
     }
 
