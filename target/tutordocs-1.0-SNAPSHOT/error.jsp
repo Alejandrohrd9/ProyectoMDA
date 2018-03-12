@@ -8,5 +8,7 @@
     </head>
     <body>
         <h1>Error de conexión</h1>
+        <%=request.getSession().getAttribute("name")%><br>
+        <%=request.getSession().getAttribute("pass")%>
     </body>
 </html>
