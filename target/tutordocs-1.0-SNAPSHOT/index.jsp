@@ -25,6 +25,14 @@
             </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
+        
+        <form action="DropboxServlet">
+            <div class="form-group">
+                <label>Carpeta</label>
+                <input type="name" name="carpeta" class="form-control" id="carpeta" aria-describedby="emailHelp" placeholder="Enter dropbox folder">
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
