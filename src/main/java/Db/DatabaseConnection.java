@@ -15,16 +15,21 @@ public class DatabaseConnection {
     
     private static Connection con;
 
-    public static Connection connection() throws SQLException {
+    public static Connection connection() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         String sURL = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11226149";
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
         con = DriverManager.getConnection(sURL, "sql11226149", "7rv3GI1RjU");
-
+        
         return con;
     }
     
-    public static boolean validateUser(String name, String pass){
+    public static boolean validateUser(String name, String pass) throws ClassNotFoundException, InstantiationException{
         try {
-            con = connection();
+            try {
+                con = connection();
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             String query = "select * from Users WHERE name = ? and pass = ?";
             

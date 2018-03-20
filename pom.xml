@@ -36,8 +36,6 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>6.3.5.jre8-preview</version>
         </dependency>
-        
-        
     </dependencies>
 
     <build>

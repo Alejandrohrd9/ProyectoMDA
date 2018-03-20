@@ -18,9 +18,7 @@ public class Dropbox {
         final String APP_SECRET = "jat1ftoil9pw3l1";
 
         DbxAppInfo appInfo = new DbxAppInfo(APP_KEY, APP_SECRET);
-
         DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", Locale.getDefault().toString());
-
         DbxClientV2 client = new DbxClientV2(config, "4V8JflXxYjAAAAAAAAAABiHsDAbMJCFEf1tJdbAjHRCIJkY0J3RnDPRrVfM-6yI3");
 
         /*FullAccount account = client.users().getCurrentAccount();
@@ -37,9 +35,9 @@ public class Dropbox {
         result = client.files().listFolderContinue(result.getCursor());
         }*/
 
-        try (InputStream in = new FileInputStream("prueba.docx")) {
+        try (InputStream in = new FileInputStream("/Users/Yisus95/Desktop/prueba.pdf")) {
             DbxUserFilesRequests files = client.files();
-            UploadBuilder up = files.uploadBuilder("/PruebaWeb");
+            UploadBuilder up = files.uploadBuilder("/pepe/prueba.pdf");
             FileMetadata metadata = up.uploadAndFinish(in);
             //FileMetadata metadata = client.files().uploadBuilder("/PruebaWeb/prueba.docx").uploadAndFinish(in);
         }

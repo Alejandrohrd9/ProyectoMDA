@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, DbxException {
+            throws ServletException, IOException, DbxException, ClassNotFoundException, InstantiationException {
         response.setContentType("text/html;charset=UTF-8");
         
         boolean a = DatabaseConnection.validateUser(request.getParameter("user"), request.getParameter("pass"));
@@ -60,6 +60,10 @@ public class LoginServlet extends HttpServlet {
             processRequest(request, response);
         } catch (DbxException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -77,6 +81,10 @@ public class LoginServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (DbxException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
