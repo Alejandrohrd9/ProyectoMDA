@@ -23,6 +23,23 @@ public class DatabaseConnection {
         return con;
     }
     
+    public static int getId(String name) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        con = connection();
+        
+        String query = "select idUsers from Users WHERE username = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setString(1, name);
+        ResultSet result = preparedStmt.executeQuery();
+        int id = 0;
+        
+        if(result.next()){
+            id = result.getInt("idUsers");
+        }
+        
+        con.close();
+        return id;
+    }
+    
     public static boolean validateUser(String name, String pass) throws ClassNotFoundException, InstantiationException{
         try {
             try {
@@ -31,7 +48,7 @@ public class DatabaseConnection {
                 Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            String query = "select * from Users WHERE name = ? and pass = ?";
+            String query = "select * from Users WHERE name = ? and password = ?";
             
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, name);

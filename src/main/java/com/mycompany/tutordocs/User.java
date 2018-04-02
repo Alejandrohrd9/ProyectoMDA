@@ -23,6 +23,12 @@ public class User {
         this.id = id;
     }
     
+    public User(String name, String pass, int id){
+        this.name = name;
+        this.pass = pass;
+        this.id = id;
+    }
+    
     public int id(){
         return id;
     }

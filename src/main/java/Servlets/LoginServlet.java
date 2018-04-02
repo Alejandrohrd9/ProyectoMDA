@@ -3,7 +3,9 @@ package Servlets;
 
 import Db.DatabaseConnection;
 import com.dropbox.core.DbxException;
+import com.mycompany.tutordocs.User;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -28,17 +30,16 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, DbxException, ClassNotFoundException, InstantiationException {
+            throws ServletException, IOException, DbxException, ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
         response.setContentType("text/html;charset=UTF-8");
         
         boolean a = DatabaseConnection.validateUser(request.getParameter("user"), request.getParameter("pass"));
         if(a){
-            System.out.println("correcto");
+            HttpSession session =  request.getSession();
+            User user = new User(request.getParameter("user"), request.getParameter("pass"), DatabaseConnection.getId(request.getParameter("user")));
+            session.setAttribute("user",user);
             response.sendRedirect("otrojsp.jsp");
         }else{
-            HttpSession session =  request.getSession();
-            session.setAttribute("name",request.getParameter("user"));
-            session.setAttribute("pass",request.getParameter("pass"));
             response.sendRedirect("error.jsp");
         }
         
@@ -58,11 +59,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (DbxException ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (DbxException | ClassNotFoundException | InstantiationException | SQLException | IllegalAccessException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -80,11 +77,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (DbxException ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (DbxException | ClassNotFoundException | InstantiationException | SQLException | IllegalAccessException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

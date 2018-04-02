@@ -4,6 +4,7 @@
     Author     : nacho
 --%>
 
+<%@page import="com.mycompany.tutordocs.User"%>
 <%@page import="Db.GroupsManagement"%>
 <%@page import="java.util.List"%>
 <%@page import="com.mycompany.tutordocs.Group"%>
@@ -18,13 +19,19 @@
     </head>
     <body>
 
-        <% List<Group> groups = GroupsManagement.getGroups(); %>
+        <% List<Group> groups = GroupsManagement.getGroups();
+            User user = (User) session.getAttribute("user");
+        %>
 
 
         <ul>
-        <%for (Group group : groups) {%>
-            <li><%=group.name()%></li>
-        <%}%>
+            <%for (Group group : groups) {
+                if (group.isMember(user)) {%>
+                    <li><a href="#"><%=group.name()%></a></li>
+                <%} else {%>
+                    <li><%=group.name()%></li>
+                <%}%>
+            <%}%>
         </ul>
 
 
