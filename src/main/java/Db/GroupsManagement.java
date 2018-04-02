@@ -7,6 +7,7 @@ package Db;
 
 import com.mycompany.tutordocs.Group;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,6 +21,20 @@ import java.util.List;
 public class GroupsManagement {
     
     private static Connection con;
+    
+    public static void registerMember(int userId, int groupId) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        con = DatabaseConnection.connection();
+        
+        String query = "insert into Miembros (idUser, idGroup) values (?,?)";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        
+        preparedStmt.setInt(1, userId);
+        preparedStmt.setInt(2, groupId);
+        
+        preparedStmt.execute();
+        con.close();
+        
+    }
     
     public static List<Group> getGroups() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         con = DatabaseConnection.connection();
@@ -41,12 +56,12 @@ public class GroupsManagement {
     public static void getMembers(List<Group> groups) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         con = DatabaseConnection.connection();
         
-        String query = "select * from Members";
+        String query = "select * from Miembros";
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(query);
         while (rs.next()) {
-            int idGroup = rs.getInt("idGroups");
-            int idUser = rs.getInt("idUsers");
+            int idGroup = rs.getInt("idGroup");
+            int idUser = rs.getInt("idUser");
             
             for (Group group : groups) {
                 if(idGroup == group.id()){

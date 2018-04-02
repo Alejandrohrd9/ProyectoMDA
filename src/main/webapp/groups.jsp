@@ -30,6 +30,11 @@
                     <li><a href="#"><%=group.name()%></a></li>
                 <%} else {%>
                     <li><%=group.name()%></li>
+                    <form action="RegisterInGroup">
+                        <input type="hidden" name="userId" value="<%=user.id()%>">
+                        <input type="hidden" name="groupId" value="<%=group.id()%>">
+                        <button type="submit">Matricularse</button>
+                    </form>
                 <%}%>
             <%}%>
         </ul>

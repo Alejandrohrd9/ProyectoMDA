@@ -4,11 +4,14 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>Servlets.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterInGroup</servlet-name>
+        <servlet-class>Servlets.RegisterInGroup</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>DropboxServlet</servlet-name>
         <servlet-class>Servlets.DropboxServlet</servlet-class>
@@ -16,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>DropboxServlet</servlet-name>
         <url-pattern>/DropboxServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterInGroup</servlet-name>
+        <url-pattern>/RegisterInGroup</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
