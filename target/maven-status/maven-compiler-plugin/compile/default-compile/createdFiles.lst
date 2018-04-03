@@ -1,4 +1,8 @@
+com\mycompany\tutordocs\Group.class
 Db\Dropbox.class
-Servlets\LoginServlet.class
 Db\DatabaseConnection.class
 Servlets\DropboxServlet.class
+com\mycompany\tutordocs\User.class
+Db\GroupsManagement.class
+Servlets\LoginServlet.class
+Servlets\RegisterInGroup.class
