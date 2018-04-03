@@ -33,8 +33,9 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException, DbxException, ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException {
         response.setContentType("text/html;charset=UTF-8");
         
-        boolean a = DatabaseConnection.validateUser(request.getParameter("user"), request.getParameter("pass"));
-        if(a){
+        
+        boolean validation = DatabaseConnection.validateUser(request.getParameter("user"), request.getParameter("pass"));
+        if(validation){
             HttpSession session =  request.getSession();
             User user = new User(request.getParameter("user"), request.getParameter("pass"), DatabaseConnection.getId(request.getParameter("user")));
             session.setAttribute("user",user);

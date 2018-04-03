@@ -24,8 +24,93 @@
                     <img src="../images/logo.png"  class="d-inline-block align-top" alt="">
                 </a>
                 <div>
-                    <button type="button" class="btn btn-outline-primary">Log in</button>
-                    <button type="button" class="btn btn-primary">Sing up</button>  
+                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#LoginModal">Iniciar sesión</button>
+                    <div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Iniciar sesión</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="../LoginServlet">
+                                    <div class="modal-body">
+                                        <div>
+                                            <label>Email o usuario</label>
+                                            <input class="form-control input-sm" type="text" name="user">
+                                        </div>
+                                        <div>
+                                            <label>Contraseña</label>
+                                            <input class="form-control input-sm" type="password" name="pass">
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SingupModal" >Registrarse</button>
+                    <div class="modal fade" id="SingupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="SingupModalLabel">Registrarse</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" action="RegisterServlet">
+                                        <div class="form-group">
+                                            <label>Nombre</label>
+                                            <input class="form-control input-sm" type="text" name="nombre">
+                                            <input type="hidden" name="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Apellidos</label>
+                                            <input class="form-control input-sm" class="form-control input-sm" type="text" name="apellidos">
+                                            <input type="hidden" name="">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input class="form-control input-sm" type="email" name="email">
+                                            <input type="hidden" name="">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre de usuario</label>
+                                            <input class="form-control input-sm" type="text" name="usuario">
+                                            <input type="hidden" name="">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Contraseña</label>
+                                            <input class="form-control input-sm" type="password" name="contraseña">
+                                            <input type="hidden" name="">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Tipo de usuario</label>
+                                            <input type="radio" name="radio" value="Profesor">Profesor
+                                            <input type="radio" name="radio" value="Estudiante">Estudiante
+                                            <input type="hidden" name="">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </header>
