@@ -65,7 +65,7 @@ public class DatabaseConnection {
                 Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            String query = "select * from Users WHERE name = ? and password = ?";
+            String query = "select * from Users WHERE username = ? and password = ?";
             
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, name);
