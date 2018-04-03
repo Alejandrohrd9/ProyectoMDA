@@ -23,6 +23,23 @@ public class DatabaseConnection {
         return con;
     }
     
+    public static String getUsername(int id)throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        con = connection();
+        
+        String query = "select username from Users WHERE idUsers = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, id);
+        ResultSet result = preparedStmt.executeQuery();
+        String name = "";
+        
+        if(result.next()){
+            name = result.getString("username");
+        }
+        
+        con.close();
+        return name;
+    }
+    
     public static int getId(String name) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         con = connection();
         

@@ -5,6 +5,8 @@
  */
 package com.mycompany.tutordocs;
 
+import Db.DatabaseConnection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,16 @@ public class Group {
         this.id = id;
         this.name = name;
         memberIds = new ArrayList<>();
+    }
+    
+    public List<String> getMembers() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        List<String> members = new ArrayList<>();
+        
+        for (Integer member : memberIds) {
+            members.add(DatabaseConnection.getUsername(member));
+        }
+        
+        return members;
     }
     
     public void addMemberId(int memberId){

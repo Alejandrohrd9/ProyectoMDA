@@ -29,7 +29,7 @@
                 <ul>
                     <%for (Group group : groups) {
                             if (group.isMember(user)) {%>
-                    <li class="list-group-item"><a href="#"><%=group.name()%></a></li>
+                    <li class="list-group-item"><a href="groupView.jsp?id=<%=group.id()%>"><%=group.name()%></a></li>
                         <%} else {%>
                     <li class="list-group-item disabled">
                         <div class="d-flex align-items-center">

@@ -36,6 +36,39 @@ public class GroupsManagement {
         
     }
     
+    public static Group getGroupById(int id)throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        con = DatabaseConnection.connection();
+        
+        String query = "select * from Groups where idGroup = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, id);
+        ResultSet result = preparedStmt.executeQuery();
+        Group group = null;
+        
+        if(result.next()){
+            group = new Group(id, result.getString("Nombre"));
+        }
+        
+        con.close();
+        getMembers(group);
+        return group;
+    }
+    
+    public static void getMembers(Group group)throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        con = DatabaseConnection.connection();
+        
+        String query = "select * from Miembros where idGroup = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, group.id());
+        ResultSet result = preparedStmt.executeQuery();
+        while (result.next()) {
+            int idUser = result.getInt("idUser");
+            group.addMemberId(idUser);
+        }
+        
+        con.close();
+    }
+    
     public static List<Group> getGroups() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         con = DatabaseConnection.connection();
         List<Group> groups = new ArrayList<>();
