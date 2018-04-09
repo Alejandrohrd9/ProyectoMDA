@@ -41,5 +41,18 @@ public class ApuntesManagement {
         con.close();
         return apuntes;
     }
+    
+     public static void deleteApunte(String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        try{
+            con = DatabaseConnection.connection();
+            String query = "DELETE FROM Apuntes WHERE id = ?";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1, id);
+            preparedStmt.executeUpdate();
+            con.close();
+        }catch(ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e){
+            System.out.println(e);
+        }   
+    }
 
 }

@@ -127,6 +127,21 @@ public class GroupsManagement {
         con.close();
     }
     
+    public static void updateGroupName(String name, String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        try {
+            con = DatabaseConnection.connection();
+
+            String query = "UPDATE Groups SET Nombre = ? WHERE idGroup = ?";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1, name);
+            preparedStmt.setString(2, id);
+            preparedStmt.executeUpdate();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
 
     
 }
