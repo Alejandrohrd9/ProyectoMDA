@@ -4,6 +4,8 @@
     Author     : nacho
 --%>
 
+<%@page import="com.mycompany.tutordocs.Apuntes"%>
+<%@page import="Db.ApuntesManagement"%>
 <%@page import="com.mycompany.tutordocs.User"%>
 <%@page import="Db.GroupsManagement"%>
 <%@page import="com.mycompany.tutordocs.Group"%>
@@ -28,21 +30,35 @@
         %>
 
 
-        
+
+
         <div class="container">
-            <h4>Miembros del grupo</h4>
-            <div class="p-2">
-                <form action="DeleteGroup">
-                    <input type="hidden" name="group" value="<%=group.id()%>">
-                    <input type="hidden" name="user" value="<%=user.id()%>">
-                    <button type="submit" class="btn btn-danger">Salir del grupo</button>
-                </form>
+            <div class="row">
+                <div class="col-9">
+                    <h4>Apuntes</h4>
+                    <ul class="list-group">
+                        <%for (Apuntes apunte : ApuntesManagement.getApuntesFromGroup(group.id())) {%>
+                        <li class="list-group-item"><%=apunte.getTitle()%> - <%=apunte.getDate()%></li>
+                            <%}%>
+                    </ul>
+                    <h4>Cuestionarios</h4>
+                </div>
+                <div class="col-3">
+                    <h4>Miembros del grupo</h4>
+                    <ul class="list-group">
+                        <%for (String member : group.getMembers()) {%>
+                        <li class="list-group-item"><%=member%></li>
+                            <%}%>
+                    </ul>
+                    <div class="p-1">
+                        <form action="DeleteGroup">
+                            <input type="hidden" name="group" value="<%=group.id()%>">
+                            <input type="hidden" name="user" value="<%=user.id()%>">
+                            <button type="submit" class="btn btn-danger">Salir del grupo</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <ul class="list-group">
-                <%for (String member : group.getMembers()) {%>
-                <li class="list-group-item"><%=member%></li>
-                    <%}%>
-            </ul>
         </div>
 
     </body>
