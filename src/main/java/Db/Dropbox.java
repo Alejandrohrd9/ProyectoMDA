@@ -35,9 +35,9 @@ public class Dropbox {
         result = client.files().listFolderContinue(result.getCursor());
         }*/
 
-        try (InputStream in = new FileInputStream("/Users/Yisus95/Desktop/prueba.pdf")) {
+        try (InputStream in = new FileInputStream("/Users/Nestor/Desktop/pruebas.pdf")) {
             DbxUserFilesRequests files = client.files();
-            UploadBuilder up = files.uploadBuilder("/pepe/prueba.pdf");
+            UploadBuilder up = files.uploadBuilder("/pepe/pruebas.pdf");
             FileMetadata metadata = up.uploadAndFinish(in);
             //FileMetadata metadata = client.files().uploadBuilder("/PruebaWeb/prueba.docx").uploadAndFinish(in);
         }

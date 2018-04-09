@@ -6,6 +6,7 @@
 package Db;
 
 import com.mycompany.tutordocs.Group;
+import com.mycompany.tutordocs.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -103,5 +104,29 @@ public class GroupsManagement {
             }
         }
     }
+    
+    public static void removeMember(String group,String user)throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        con = DatabaseConnection.connection();
+        
+        String selectId = "select * from Miembros where idGroup = ? and idUser = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(selectId);
+        preparedStmt.setInt(1, Integer.parseInt(group));
+        preparedStmt.setInt(2, Integer.parseInt(user));
+        ResultSet rs = preparedStmt.executeQuery();
+        int id=0;
+        while (rs.next()) {
+            id = rs.getInt("id");
+        
+        }
+        
+        String query = "delete from Miembros where id = ?";
+        PreparedStatement preparedStmt1 = con.prepareStatement(query);
+        preparedStmt1.setInt(1, id);
+        preparedStmt1.execute();
+
+        con.close();
+    }
+    
+
     
 }

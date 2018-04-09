@@ -28,8 +28,16 @@
         %>
 
 
+        
         <div class="container">
             <h4>Miembros del grupo</h4>
+            <div class="p-2">
+                <form action="DeleteGroup">
+                    <input type="hidden" name="group" value="<%=group.id()%>">
+                    <input type="hidden" name="user" value="<%=user.id()%>">
+                    <button type="submit" class="btn btn-danger">Salir del grupo</button>
+                </form>
+            </div>
             <ul class="list-group">
                 <%for (String member : group.getMembers()) {%>
                 <li class="list-group-item"><%=member%></li>

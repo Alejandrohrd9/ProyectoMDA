@@ -1,0 +1,11 @@
+com/mycompany/tutordocs/User.class
+Servlets/LogOutServlet.class
+Servlets/DropboxServlet.class
+Servlets/DeleteGroup.class
+Servlets/RegisterServlet.class
+Servlets/RegisterInGroup.class
+Db/Dropbox.class
+Servlets/LoginServlet.class
+com/mycompany/tutordocs/Group.class
+Db/GroupsManagement.class
+Db/DatabaseConnection.class
