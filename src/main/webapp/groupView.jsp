@@ -4,6 +4,8 @@
     Author     : nacho
 --%>
 
+<%@page import="com.mycompany.tutordocs.Cuestionario"%>
+<%@page import="Db.CuestionariosManagement"%>
 <%@page import="com.mycompany.tutordocs.Apuntes"%>
 <%@page import="Db.ApuntesManagement"%>
 <%@page import="com.mycompany.tutordocs.User"%>
@@ -42,6 +44,11 @@
                             <%}%>
                     </ul>
                     <h4>Cuestionarios</h4>
+                    <ul class="list-group">
+                        <%for (Cuestionario cuestionario : CuestionariosManagement.getGroupCuestionarios(group.id())) {%>
+                        <li class="list-group-item"><%=cuestionario.getTitle()%> - <%=cuestionario.getDate()%></li>
+                            <%}%>
+                    </ul>
                 </div>
                 <div class="col-3">
                     <h4>Miembros del grupo</h4>
