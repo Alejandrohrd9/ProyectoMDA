@@ -139,8 +139,8 @@
                     <div class="carousel-item">
                         <img class="d-block w-100" src="../images/bg3.jpg" alt="Third slide">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>...</h5>
-                            <p>...</p>
+                            <h5>Study with us</h5>
+                            <p>we have the best courses on the Internet</p>
                         </div>
                     </div>
                 </div>
@@ -156,7 +156,7 @@
         </section>
         <main>
             <div class="container">
-                <h2>Lorem</h2>
+                <h2>¿Quienes somos?</h2>
                 <section class="row">
                     <div class="col-md-2">
                     </div>
@@ -185,29 +185,32 @@
 
             <section class="sectionInformation">
                 <div class="container">
-                    <h2>Lorem</h2>
+                    <h2>Nuestros servicios</h2>
                     <div class="row">
                         <div class="col-md-2"></div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 wrapper">
                             <img src="../images/CURSO.png" alt="">
                             <p>10000</p>
+                            <p>Cursos</p>
                         </div>
                         <div class="col-md-2">
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 wrapper">
                             <img src="../images/DOCUMENTOS.png" alt="">
-                            <p>1000</p>
+                            <p>10000</p>
+                            <p>Documentos</p>
                         </div>
                         <div class="col-md-2"></div>
                     </div>
                 </div>
             </section>
-            <section class="sectionSignUp">
+            <section class="sectionSignUp wrapper">
+                <h2>Registrate Ya!</h2>
                 <button type="button" class="btn btn-primary">Sing up Now</button> 
             </section>
         </main>
         <footer>
-            sa
+            © Copyright 2018 - All Rights Reserved 
         </footer>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

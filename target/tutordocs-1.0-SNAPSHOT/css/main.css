@@ -14,6 +14,8 @@ h2 {
 
 footer {
     background-color: #255f85;
+    color: white;
+    text-align: center;
 }
 
 .row {
@@ -21,12 +23,87 @@ footer {
 }
 
 .sectionInformation {
-    background-color: #6cd3ff;
+    padding: 20px 0;
+    background-color: #39afbf;
+    color: white;
 }
 
 .sectionSignUp {
+    background-image: url(../images/background-learner.jpg);
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
+}
+.sectionSignUp button {
+    margin-top: 30px;
 }
 
+
+.navbar__user {
+    background-color: #007bff;
+}
+
+.sidebar {
+    background-color: #000000;
+    position: fixed;
+    top: 84px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 20px 0;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    border-right: 1px solid #eee;
+}
+
+.sidebar .nav {
+    margin-bottom: 20px;
+}
+
+.sidebar .nav-item {
+    padding: 10px 0;
+    width: 100%;
+    border-top: 1px #fff solid;
+    border-bottom: 1px #fff solid;
+}
+
+.sidebar .nav-link {
+    border-radius: 0;
+    color: white;
+}
+
+.sidebar .nav-item:hover {
+    background-color: #007bff;
+}
+
+.container_user {
+    padding-top: 100px;
+}
+
+.user__card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+    color:white;
+    font-size: 15px;
+    /** background-color: #3f3f3f;*/
+}
+
+.user__card__img {
+    height: 60px;
+    width: 60px;
+    margin-right: 20px;
+    border-radius: 50%;
+    border: 3px white solid;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
