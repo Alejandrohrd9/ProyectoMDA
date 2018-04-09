@@ -1,9 +1,12 @@
 Db\ApuntesManagement.class
 Db\Dropbox.class
 Db\DatabaseConnection.class
+com\mycompany\tutordocs\Cuestionario.class
 Servlets\RegisterInGroup.class
 com\mycompany\tutordocs\Group.class
+Db\CuestionariosManagement.class
 Servlets\LogOutServlet.class
+com\mycompany\tutordocs\Ejercicio.class
 com\mycompany\tutordocs\Apuntes.class
 Servlets\DropboxServlet.class
 com\mycompany\tutordocs\User.class

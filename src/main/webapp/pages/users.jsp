@@ -4,6 +4,7 @@
     Author     : Cristian
 --%>
 
+<%@page import="com.mycompany.tutordocs.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,6 +16,11 @@
         <title>Cursos</title>
     </head>
     <body>
+        
+        <% 
+            User user = (User) session.getAttribute("user");
+        %>
+        
         <nav class="navbar navbar-light navbar__user fixed-top">
             <a class="navbar-brand" href="#">
                 <img src="../images/logo_inverse.png"  class="d-inline-block align-top" alt="">
@@ -31,7 +37,7 @@
                             <div>
                                 <img class="user__card__img" src="../images/person1.jpg">
                             </div>
-                            <div class="user__card__nameuser">User name</div>
+                            <div class="user__card__nameuser"><%=user.username()%></div>
                         </div>
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item">

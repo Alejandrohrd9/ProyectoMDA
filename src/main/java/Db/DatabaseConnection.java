@@ -1,6 +1,7 @@
 package Db;
 
 
+import com.mycompany.tutordocs.User;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,6 +22,23 @@ public class DatabaseConnection {
         con = DriverManager.getConnection(sURL, "sql11226149", "7rv3GI1RjU");
         
         return con;
+    }
+    
+    public static User getUser(int id)throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        con = connection();
+        
+        String query = "select * from Users WHERE idUsers = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, id);
+        
+        ResultSet result = preparedStmt.executeQuery();
+        User user = null;
+        
+        if(result.next()){
+            user = new User(result.getString("name"), result.getString("surname"), result.getString("email"), result.getString("usertype"), result.getString("username"), result.getString("password"), id);
+        }
+        
+        return user;
     }
     
     public static String getUsername(int id)throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
@@ -84,5 +102,22 @@ public class DatabaseConnection {
         return false;
     }
     
+    public static void registerUser(String name, String surname, String username, String password, String email, String type) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        con = DatabaseConnection.connection();
+
+        String query = "insert into Users (name,surname,username,password,email,usertype) values (?,?,?,?,?,?)";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+
+        preparedStmt.setString(1, name);
+        preparedStmt.setString(2, surname);
+        preparedStmt.setString(3, username);
+        preparedStmt.setString(4, password);
+        preparedStmt.setString(5, email);
+        preparedStmt.setString(6, type);
+
+        preparedStmt.execute();
+        con.close();
+
+    }
     
 }

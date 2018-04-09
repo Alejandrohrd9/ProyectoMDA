@@ -4,6 +4,10 @@
     Author     : Cristian
 --%>
 
+<%@page import="com.mycompany.tutordocs.User"%>
+<%@page import="Db.GroupsManagement"%>
+<%@page import="com.mycompany.tutordocs.Group"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,6 +19,9 @@
         <title>Grupos</title>
     </head>
     <body>
+        <% List<Group> groups = GroupsManagement.getGroups();
+            User user = (User) session.getAttribute("user");
+        %>
         <nav class="navbar navbar-light navbar__user fixed-top">
             <a class="navbar-brand" href="#">
                 <img src="../images/logo_inverse.png"  class="d-inline-block align-top" alt="">
@@ -31,7 +38,7 @@
                             <div>
                                 <img class="user__card__img" src="../images/person1.jpg">
                             </div>
-                            <div class="user__card__nameuser">User name</div>
+                            <div class="user__card__nameuser"><%=user.username()%></div>
                         </div>
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item">
@@ -52,17 +59,29 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-7">
                     <h3>Lista de Grupos</h3>
+                    <%
+                        for (Group group : groups) {%>
                     <div class="jumbotron">
-                        <h3 >Grupo 1</h3>
+                        <% if(group.isMember(user)){ %>
+                        <h3><a href="../groupView.jsp?id=<%=group.id()%>"><%=group.name()%></a></h3>
+                        <%}else{%>
+                        <h3 ><%=group.name()%></h3>
+                        <%}%>
                         <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                        <a class="btn btn-primary btn-md" href="#" role="button">Inscribete</a>
-                    </div>
-                    <div class="jumbotron">
-                        <h3 >Grupo 2</h3>
-                        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                        <a class="btn btn-primary btn-md" href="#" role="button">Inscribete</a>
-                    </div>
-                </div>
+                        <% if (!group.isMember(user)) {%>
+                        <form action="../RegisterInGroup">
+                            <div class="form-group row">
+                                <input type="hidden" name="userId" value="<%=user.id()%>">
+                                <input type="hidden" name="groupId" value="<%=group.id()%>">
+                                <button type="submit" class="btn btn-primary">Matricularse</button>
+                            </div>
+                        </form>
+                        <%}%>
+                    </div>  
+                    <%}
+                    %>
+
+                </div>  
                 <div class="col-md-1"></div>
                 </main>
             </div>

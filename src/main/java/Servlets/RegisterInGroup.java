@@ -36,7 +36,7 @@ public class RegisterInGroup extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         GroupsManagement.registerMember(Integer.parseInt(request.getParameter("userId")), Integer.parseInt(request.getParameter("groupId")));
-        response.sendRedirect("groups.jsp");
+        response.sendRedirect("pages/users_group.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

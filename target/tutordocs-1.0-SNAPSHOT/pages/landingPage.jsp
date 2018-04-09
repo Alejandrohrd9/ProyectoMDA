@@ -66,48 +66,43 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="post" action="RegisterServlet">
+                                    <form method="post" action="../RegisterServlet">
                                         <div class="form-group">
                                             <label>Nombre</label>
                                             <input class="form-control input-sm" type="text" name="nombre">
-                                            <input type="hidden" name="">
                                         </div>
                                         <div class="form-group">
                                             <label>Apellidos</label>
                                             <input class="form-control input-sm" class="form-control input-sm" type="text" name="apellidos">
-                                            <input type="hidden" name="">
                                         </div>
 
                                         <div class="form-group">
                                             <label>Email</label>
                                             <input class="form-control input-sm" type="email" name="email">
-                                            <input type="hidden" name="">
                                         </div>
 
                                         <div class="form-group">
                                             <label>Nombre de usuario</label>
                                             <input class="form-control input-sm" type="text" name="usuario">
-                                            <input type="hidden" name="">
                                         </div>
 
                                         <div class="form-group">
                                             <label>Contraseña</label>
-                                            <input class="form-control input-sm" type="password" name="contraseña">
-                                            <input type="hidden" name="">
+                                            <input class="form-control input-sm" type="password" name="contrasena">
                                         </div>
 
                                         <div class="form-group">
                                             <label>Tipo de usuario</label>
                                             <input type="radio" name="radio" value="Profesor">Profesor
                                             <input type="radio" name="radio" value="Estudiante">Estudiante
-                                            <input type="hidden" name="">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-primary">Registrarse</button>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Registrarse</button>
-                                </div>
+
                             </div>
                         </div>
                     </div>

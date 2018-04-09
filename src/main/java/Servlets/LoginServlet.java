@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
         boolean validation = DatabaseConnection.validateUser(request.getParameter("user"), request.getParameter("pass"));
         if(validation){
             HttpSession session =  request.getSession();
-            User user = new User(request.getParameter("user"), request.getParameter("pass"), DatabaseConnection.getId(request.getParameter("user")));
+            User user = DatabaseConnection.getUser(DatabaseConnection.getId(request.getParameter("user")));
             session.setAttribute("user",user);
             response.sendRedirect("./pages/users.jsp");
         }else{

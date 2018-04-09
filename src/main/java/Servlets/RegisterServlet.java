@@ -5,13 +5,19 @@
  */
 package Servlets;
 
+import Db.DatabaseConnection;
+import com.mycompany.tutordocs.User;
 import java.io.IOException;
-import java.io.PrintWriter;
+
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,11 +36,17 @@ public class RegisterServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         response.setContentType("text/html;charset=UTF-8");
-        String email = request.getParameter("email");
-        String pass = request.getParameter("pass");
-        String username = request.getParameter("username");
+        try {
+            HttpSession session = request.getSession();
+            User user = new User(request.getParameter("nombre"), request.getParameter("apellidos"), request.getParameter("email"), request.getParameter("radio"), request.getParameter("usuario"), request.getParameter("contrasena"), DatabaseConnection.getId(request.getParameter("usuario")));
+            session.setAttribute("usuario", user);
+            DatabaseConnection.registerUser(request.getParameter("nombre"), request.getParameter("apellidos"), request.getParameter("usuario"), request.getParameter("contrasena"), request.getParameter("email"), request.getParameter("radio"));
+            response.sendRedirect("pages/landingPage.jsp");
+        } catch (SQLException ex) {
+            response.sendRedirect("error.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -49,7 +61,15 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -63,7 +83,15 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
