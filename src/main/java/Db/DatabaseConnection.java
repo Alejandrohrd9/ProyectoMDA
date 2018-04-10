@@ -15,9 +15,9 @@ public class DatabaseConnection {
     private static Connection con;
 
     public static Connection connection() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        String sURL = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11226149";
+        String sURL = "jdbc:mysql://dz8959rne9lumkkw.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/m9gm4nvgikpx1sgj?autoReconnect=true&useSSL=false";
         Class.forName("com.mysql.jdbc.Driver").newInstance();
-        con = DriverManager.getConnection(sURL, "sql11226149", "7rv3GI1RjU");
+        con = DriverManager.getConnection(sURL, "b6n359fv0fxrlrt5", "yjte7payqqcnltyg");
 
         return con;
     }
@@ -36,6 +36,7 @@ public class DatabaseConnection {
             user = new User(result.getString("name"), result.getString("surname"), result.getString("email"), result.getString("usertype"), result.getString("username"), result.getString("password"), id);
         }
 
+        con.close();
         return user;
     }
 
@@ -89,21 +90,31 @@ public class DatabaseConnection {
 
     }
 
-    public static void registerUser(String name, String surname, String username, String password, String email, String type) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        con = DatabaseConnection.connection();
-
-        String query = "insert into Users (name,surname,username,password,email,usertype) values (?,?,?,?,?,?)";
-        PreparedStatement preparedStmt = con.prepareStatement(query);
-
-        preparedStmt.setString(1, name);
-        preparedStmt.setString(2, surname);
-        preparedStmt.setString(3, username);
-        preparedStmt.setString(4, password);
-        preparedStmt.setString(5, email);
-        preparedStmt.setString(6, type);
-
-        preparedStmt.execute();
-        con.close();
+    public static void registerUser(String name, String surname, String username, String password, String email, String type){
+        try {
+            con = DatabaseConnection.connection();
+            
+            String query = "insert into Users (name,surname,username,password,email,usertype) values (?,?,?,?,?,?)";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            
+            preparedStmt.setString(1, name);
+            preparedStmt.setString(2, surname);
+            preparedStmt.setString(3, username);
+            preparedStmt.setString(4, password);
+            preparedStmt.setString(5, email);
+            preparedStmt.setString(6, type);
+            
+            preparedStmt.execute();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 

@@ -40,11 +40,12 @@ public class RegisterServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             HttpSession session = request.getSession();
+            DatabaseConnection.registerUser(request.getParameter("nombre"), request.getParameter("apellidos"), request.getParameter("usuario"), request.getParameter("contrasena"), request.getParameter("email"), request.getParameter("radio"));
             User user = new User(request.getParameter("nombre"), request.getParameter("apellidos"), request.getParameter("email"), request.getParameter("radio"), request.getParameter("usuario"), request.getParameter("contrasena"), DatabaseConnection.getId(request.getParameter("usuario")));
             session.setAttribute("usuario", user);
-            DatabaseConnection.registerUser(request.getParameter("nombre"), request.getParameter("apellidos"), request.getParameter("usuario"), request.getParameter("contrasena"), request.getParameter("email"), request.getParameter("radio"));
             response.sendRedirect("pages/landingPage.jsp");
         } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
             response.sendRedirect("error.jsp");
         }
     }

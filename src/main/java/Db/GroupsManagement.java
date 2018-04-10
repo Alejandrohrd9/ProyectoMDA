@@ -103,6 +103,7 @@ public class GroupsManagement {
                 }
             }
         }
+        con.close();
     }
     
     public static void removeMember(String group,String user)throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
@@ -138,6 +139,7 @@ public class GroupsManagement {
             preparedStmt.executeUpdate();
             con.close();
         } catch (SQLException e) {
+            con.close();
             System.out.println(e);
         }
     }
