@@ -1,7 +1,9 @@
 package Db;
+
 import com.dropbox.core.*;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.DbxUserFilesRequests;
+import com.dropbox.core.v2.files.DeleteResult;
 import com.dropbox.core.v2.files.FileMetadata;
 import com.dropbox.core.v2.files.ListFolderResult;
 import com.dropbox.core.v2.files.Metadata;
@@ -11,7 +13,15 @@ import java.io.*;
 import java.util.Locale;
 
 public class Dropbox {
-    
+
+    private DbxRequestConfig config;
+    private DbxClientV2 client;
+
+    public Dropbox() {
+        config = new DbxRequestConfig("dropbox/java-tutorial", Locale.getDefault().toString());
+        client = new DbxClientV2(config, "4V8JflXxYjAAAAAAAAAABiHsDAbMJCFEf1tJdbAjHRCIJkY0J3RnDPRrVfM-6yI3");
+    }
+
     public void create(String folder) throws IOException, DbxException {
         // Get your app key and secret from the Dropbox developers website.
         final String APP_KEY = "6c74lyouvx9b2zm";
@@ -34,12 +44,16 @@ public class Dropbox {
         }
         result = client.files().listFolderContinue(result.getCursor());
         }*/
-
         try (InputStream in = new FileInputStream("/Users/Nestor/Desktop/pruebas.pdf")) {
             DbxUserFilesRequests files = client.files();
             UploadBuilder up = files.uploadBuilder("/pepe/pruebas.pdf");
             FileMetadata metadata = up.uploadAndFinish(in);
             //FileMetadata metadata = client.files().uploadBuilder("/PruebaWeb/prueba.docx").uploadAndFinish(in);
         }
+    }
+
+    public void deleteFile(String urlPath) throws DbxException {
+        DbxUserFilesRequests files = client.files();
+        DeleteResult deleteRes = files.deleteV2(urlPath);
     }
 }

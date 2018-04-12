@@ -41,7 +41,12 @@
                     <ul class="list-group">
                         <%for (Apuntes apunte : ApuntesManagement.getApuntesFromGroup(group.id())) {%>
                         <li class="list-group-item"><%=apunte.getTitle()%> - <%=apunte.getDate()%></li>
-                            <%}%>
+
+                        <form action="DeleteNote">
+                            <input type="hidden" name="id" value="<%=apunte.getId()%>">
+                            <input type="submit" class="btn btn-danger" value="Borrar Apunte">
+                        </form>
+                        <%}%>
                     </ul>
                     <h4>Cuestionarios</h4>
                     <ul class="list-group">
