@@ -4,6 +4,11 @@
     Author     : Cristian
 --%>
 
+<%@page import="com.mycompany.tutordocs.User"%>
+<%@page import="Db.DatabaseConnection"%>
+<%@page import="com.mycompany.tutordocs.Theme"%>
+<%@page import="java.util.List"%>
+<%@page import="Db.ThemeManagement"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -51,6 +56,10 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-7">
                     <h3>Tablón de Anuncios</h3>
+                    <form action="../AddThemeServlet">
+                        <input type="text" name="theme">
+                        <input class="btn btn-primary" type="submit" value="Crear tema"/>
+                    </form>
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
@@ -59,18 +68,21 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <%
+                                List<Theme> themes = ThemeManagement.getAllThemes();
+                                for (Theme theme : themes) {
+                                    
+                            %>
                             <tr>
-                                <td><a href="#">Anuncio 1</a></td>
-                                <td>Pepe</td>
+                                <td><a href="theme.jsp?idtheme=<%out.println(theme.getIdtheme());%>&name=<%out.println(theme.getName());%>"><%out.println(theme.getName());%></a></td>
+                                <%
+                                    User user = DatabaseConnection.getUser(theme.getCreator());
+                                %>
+                                <td><a href="#"><%out.println(user.username());%></a></td>
                             </tr>
-                            <tr>
-                                <td><a href="#">Anuncio 2</a></td>
-                                <td>Paco</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">Anuncio 3</a></td>
-                                <td>Pedro</td>
-                            </tr>
+                            <%
+                                }
+                            %>
                         </tbody>
                     </table>
                 </div>

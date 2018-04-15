@@ -1,7 +1,12 @@
 C:\Users\Cristian\Documents\Uni\4º\2Custrimestre\ProyectoMDA\src\main\java\com\mycompany\tutordocs\Apuntes.java
+C:\Users\Cristian\Documents\Uni\4º\2Custrimestre\ProyectoMDA\src\main\java\com\mycompany\tutordocs\Message.java
 C:\Users\Cristian\Documents\Uni\4º\2Custrimestre\ProyectoMDA\src\main\java\com\mycompany\tutordocs\User.java
 C:\Users\Cristian\Documents\Uni\4º\2Custrimestre\ProyectoMDA\src\main\java\com\mycompany\tutordocs\Group.java
+C:\Users\Cristian\Documents\Uni\4º\2Custrimestre\ProyectoMDA\src\main\java\Servlets\deleteNote.java
+C:\Users\Cristian\Documents\Uni\4º\2Custrimestre\ProyectoMDA\src\main\java\Db\ThemeManagement.java
 C:\Users\Cristian\Documents\Uni\4º\2Custrimestre\ProyectoMDA\src\main\java\Servlets\RegisterInGroup.java
+C:\Users\Cristian\Documents\Uni\4º\2Custrimestre\ProyectoMDA\src\main\java\Servlets\AddMessageServlet.java
+C:\Users\Cristian\Documents\Uni\4º\2Custrimestre\ProyectoMDA\src\main\java\Servlets\AddThemeServlet.java
 C:\Users\Cristian\Documents\Uni\4º\2Custrimestre\ProyectoMDA\src\main\java\Servlets\LogOutServlet.java
 C:\Users\Cristian\Documents\Uni\4º\2Custrimestre\ProyectoMDA\src\main\java\Db\ApuntesManagement.java
 C:\Users\Cristian\Documents\Uni\4º\2Custrimestre\ProyectoMDA\src\main\java\Db\GroupsManagement.java
@@ -14,3 +19,5 @@ C:\Users\Cristian\Documents\Uni\4º\2Custrimestre\ProyectoMDA\src\main\java\Db\Dr
 C:\Users\Cristian\Documents\Uni\4º\2Custrimestre\ProyectoMDA\src\main\java\Db\CuestionariosManagement.java
 C:\Users\Cristian\Documents\Uni\4º\2Custrimestre\ProyectoMDA\src\main\java\Servlets\DeleteGroup.java
 C:\Users\Cristian\Documents\Uni\4º\2Custrimestre\ProyectoMDA\src\main\java\com\mycompany\tutordocs\Cuestionario.java
+C:\Users\Cristian\Documents\Uni\4º\2Custrimestre\ProyectoMDA\src\main\java\com\mycompany\tutordocs\Theme.java
+C:\Users\Cristian\Documents\Uni\4º\2Custrimestre\ProyectoMDA\src\main\java\Db\MessageManagement.java

@@ -48,7 +48,7 @@
                                 <a class="nav-link" href="users_group.jsp">Grupos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Analytics</a>
+                                <a class="nav-link" href="noticeBoard.jsp">Tablón</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Cerrar Sesion</a>
