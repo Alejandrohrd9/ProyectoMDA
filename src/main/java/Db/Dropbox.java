@@ -2,54 +2,41 @@ package Db;
 
 import com.dropbox.core.*;
 import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.CreateFolderResult;
 import com.dropbox.core.v2.files.DbxUserFilesRequests;
 import com.dropbox.core.v2.files.DeleteResult;
 import com.dropbox.core.v2.files.FileMetadata;
-import com.dropbox.core.v2.files.ListFolderResult;
-import com.dropbox.core.v2.files.Metadata;
 import com.dropbox.core.v2.files.UploadBuilder;
-import com.dropbox.core.v2.users.FullAccount;
 import java.io.*;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.fileupload.*;
 
 public class Dropbox {
 
     private DbxRequestConfig config;
     private DbxClientV2 client;
 
-    public Dropbox() {
-        config = new DbxRequestConfig("dropbox/java-tutorial", Locale.getDefault().toString());
+    public Dropbox(){
+        final String APP_KEY = "6c74lyouvx9b2zm";
+        final String APP_SECRET = "jat1ftoil9pw3l1";
+        DbxAppInfo appInfo = new DbxAppInfo(APP_KEY, APP_SECRET);
+        DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", Locale.getDefault().toString());
         client = new DbxClientV2(config, "4V8JflXxYjAAAAAAAAAABiHsDAbMJCFEf1tJdbAjHRCIJkY0J3RnDPRrVfM-6yI3");
     }
 
-    public void create(String folder) throws IOException, DbxException {
-        // Get your app key and secret from the Dropbox developers website.
-        final String APP_KEY = "6c74lyouvx9b2zm";
-        final String APP_SECRET = "jat1ftoil9pw3l1";
+    public void insertFile(String name, InputStream in, HttpServletRequest request, HttpServletResponse response) throws IOException, DbxException, FileUploadException, Exception {
 
-        DbxAppInfo appInfo = new DbxAppInfo(APP_KEY, APP_SECRET);
-        DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", Locale.getDefault().toString());
-        DbxClientV2 client = new DbxClientV2(config, "4V8JflXxYjAAAAAAAAAABiHsDAbMJCFEf1tJdbAjHRCIJkY0J3RnDPRrVfM-6yI3");
+        DbxUserFilesRequests files = client.files();
+        UploadBuilder up = files.uploadBuilder(name);
+        FileMetadata metadata = up.uploadAndFinish(in);
+    }
 
-        /*FullAccount account = client.users().getCurrentAccount();
-        System.out.println(account.getName().getDisplayName());
-        
-        ListFolderResult result = client.files().listFolder("");
-        while (true) {
-        for (Metadata metadata : result.getEntries()) {
-        System.out.println(metadata.getPathLower());
-        }
-        if (!result.getHasMore()) {
-        break;
-        }
-        result = client.files().listFolderContinue(result.getCursor());
-        }*/
-        try (InputStream in = new FileInputStream("/Users/Nestor/Desktop/pruebas.pdf")) {
-            DbxUserFilesRequests files = client.files();
-            UploadBuilder up = files.uploadBuilder("/pepe/pruebas.pdf");
-            FileMetadata metadata = up.uploadAndFinish(in);
-            //FileMetadata metadata = client.files().uploadBuilder("/PruebaWeb/prueba.docx").uploadAndFinish(in);
-        }
+    public void createFolder(String name) throws DbxException {
+        DbxUserFilesRequests files = client.files();
+        CreateFolderResult up = files.createFolderV2("/"+name);
     }
 
     public void deleteFile(String urlPath) throws DbxException {

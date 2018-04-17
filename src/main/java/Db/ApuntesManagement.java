@@ -19,11 +19,28 @@ public class ApuntesManagement {
     private static Connection con;
 
     public static Connection connection() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        String sURL = "jdbc:mysql://sql11.freesqldatabase.com:3306/sql11226149";
+        String sURL = "jdbc:mysql://dz8959rne9lumkkw.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/m9gm4nvgikpx1sgj?autoReconnect=true&useSSL=false";
         Class.forName("com.mysql.jdbc.Driver").newInstance();
-        con = DriverManager.getConnection(sURL, "sql11226149", "7rv3GI1RjU");
+        con = DriverManager.getConnection(sURL, "b6n359fv0fxrlrt5", "yjte7payqqcnltyg");
 
         return con;
+    }
+    
+    public static void insertApunte(int group_id, int user_id, String url, String title) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        con = DatabaseConnection.connection();
+        
+        String query = "insert into Apuntes (group_id, user_id, url, title) values (?,?,?,?)";
+        PreparedStatement ps = con.prepareStatement(query);
+
+        ps.setInt(1, group_id);
+        ps.setInt(2, user_id);
+        ps.setString(3, url);
+        ps.setString(4, title);
+
+        ps.execute();
+        
+        con.close();
+        
     }
 
     public static List<Apuntes> getApuntesFromGroup(int group_id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {

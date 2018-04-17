@@ -62,9 +62,9 @@
                     <%
                         for (Group group : groups) {%>
                     <div class="jumbotron">
-                        <% if(group.isMember(user)){ %>
-                        <h3><a href="../groupView.jsp?id=<%=group.id()%>"><%=group.name()%></a></h3>
-                        <%}else{%>
+                        <% if (group.isMember(user)) {%>
+                        <h3><a href="../groupView.jsp?id=<%=group.id()%>&groupName=<%=group.name()%>"><%=group.name()%></a></h3>
+                            <%} else {%>
                         <h3 ><%=group.name()%></h3>
                         <%}%>
                         <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
@@ -80,7 +80,16 @@
                     </div>  
                     <%}
                     %>
-
+                    <div class="jumbotron">
+                        <div class="form-group">
+                            <h3>Crear grupo</h3>
+                            <form action="../CreateGroup" method="get">
+                                <label for="groupName">Introduce el nombre del grupo</label><br>
+                                <input type="text" name="groupName" id="users" placeholder="Nombre del grupo"><br>
+                                <button type="submit" class="btn btn-primary">Enviar</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>  
                 <div class="col-md-1"></div>
                 </main>

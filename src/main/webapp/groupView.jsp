@@ -48,6 +48,12 @@
                         </form>
                         <%}%>
                     </ul>
+                    <form action="DropboxServlet?userId=<%=request.getParameter("id")%>&groupId=<%=request.getParameter("id")%>" enctype="multipart/form-data" method="post">
+                            <h1>Subir archivo</h1>
+                            <input type="hidden" name="groupName" value="<%=request.getParameter("groupName")%>">
+                            <input type="file" name="file" id="file"/><br/>
+                            <input type="submit" value="Upload" />
+                        </form>
                     <h4>Cuestionarios</h4>
                     <ul class="list-group">
                         <%for (Cuestionario cuestionario : CuestionariosManagement.getGroupCuestionarios(group.id())) {%>

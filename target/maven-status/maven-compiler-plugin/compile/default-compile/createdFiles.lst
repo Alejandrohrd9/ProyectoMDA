@@ -4,6 +4,7 @@ com\mycompany\tutordocs\Message.class
 Db\DatabaseConnection.class
 com\mycompany\tutordocs\Cuestionario.class
 com\mycompany\tutordocs\Theme.class
+Servlets\CreateGroup.class
 Servlets\RegisterInGroup.class
 com\mycompany\tutordocs\Group.class
 Db\CuestionariosManagement.class

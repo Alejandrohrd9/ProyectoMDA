@@ -144,6 +144,15 @@ public class GroupsManagement {
         }
     }
     
+    public static void createGroup(String nombre) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        con = DatabaseConnection.connection();
+        String query = "insert into Groups (Nombre) values (?)";
+        PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        preparedStmt.setString(1, nombre);
+        preparedStmt.execute();
+        con.close();
+    }
+    
 
     
 }
