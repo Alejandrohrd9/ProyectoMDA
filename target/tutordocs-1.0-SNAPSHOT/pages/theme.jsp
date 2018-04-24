@@ -60,28 +60,61 @@
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-7">
-                    <h3><%
-                        out.println(request.getParameter("name"));
-                        //Buscar idtheme, por lo que deberia hacerlo en la url de boards
-                        %></h3>
+                    <h3>
+                        <%
+                            out.println(request.getParameter("name"));
+                            //Buscar idtheme, por lo que deberia hacerlo en la url de boards
+                        %>
+                    </h3>
                     <%
                         int idtheme = Integer.parseInt(request.getParameter("idtheme"));
                         List<Message> messages = ThemeManagement.getMessagesByTheme(idtheme);
                         for (Message message : messages) {
                     %>
                     <div class="jumbotron">
-                        <%
-                            out.println(message.getData());
-                            out.println(message.getCreatetAt());
+                        <h4><%
                             User user = DatabaseConnection.getUser(message.getIdCreator());
-                            out.println(user.username());
-                            out.println(message.getIdCreator());
+                            out.println(user.username());%>
+                        </h4>
+                        <div class="modal-body modal-body--bgwhite">
+                            <%
+                                out.println(message.getData());
+                            %>
+                        </div>
+                        <%
                             if (message.getIdCreator() == userSession.id()) {
                         %>
-                        <form action="../RemoveMessageServlet"> 
-                            <input type="hidden" name="idmessage" value="<%out.print(message.getIdMessage());%>">
-                            <input type="submit"  value="Eliminar">
-                        </form>       
+                        <div class="btn-groups">
+                            <form action="../RemoveMessageServlet"> 
+                                <input type="hidden" name="idmessage" value="<%out.print(message.getIdMessage());%>">
+                                <input type="submit" class="btn btn-danger btn-sm"  value="Eliminar">
+                            </form>       
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal">
+                                Modificar
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="myModalLabel">Mensaje</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        </div>
+                                        <form action="../UpdateMessageServlet">
+                                            <div class="modal-body">
+                                                <input type="hidden" name="idmessage" value="<%out.print(message.getIdMessage());%>"/>
+                                                <input class="form-control" name="messageModified" value="<%out.print(message.getData());%>"></input>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="submit" class="btn btn-primary" value="Guardar Cambios"></input>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <%
                             }
                         %>
@@ -90,9 +123,9 @@
                         }
                     %>
                     <form action="../AddMessageServlet">
-                        <textarea name="textMessage"></textarea>  
+                        <textarea  class="form-control" name="textMessage" placeholder="Introduzca un mensaje"></textarea>  
                         <input type="hidden" name="idtheme" value="<%out.print(request.getParameter("idtheme"));%>">
-                        <input type="submit"  value="Enviar">
+                        <input type="submit" class="btn btn-primary form-control" value="Enviar">
                     </form>
                 </div>
             </div>
@@ -100,6 +133,7 @@
             <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script src="../js/index.js"></script>
     </body>
 </html>
 

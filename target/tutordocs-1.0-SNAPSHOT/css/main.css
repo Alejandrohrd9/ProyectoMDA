@@ -122,3 +122,21 @@ footer {
 .jumbotron svg {
     margin-right:  5px;  
 }
+
+/**Buttons*/
+
+.btn-groups {
+    display: flex;
+    justify-content:flex-end;
+}
+
+.btn-groups button {
+    margin: 0 10px;
+}
+
+.modal-body--bgwhite {
+    background-color: #fff;
+    border:1px #000000 solid;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}

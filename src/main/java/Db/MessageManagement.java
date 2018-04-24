@@ -39,5 +39,14 @@ public class MessageManagement {
         preparedStmt.execute();
         con.close();
     }
+    public static void updateMessage(int idmessage, String text) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        con = DatabaseConnection.connection();
+        String query = "update messages set data=? where idmessages=?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setString(1, text);
+        preparedStmt.setInt(2, idmessage);
+        preparedStmt.execute();
+        con.close();
+    }
 
 }
