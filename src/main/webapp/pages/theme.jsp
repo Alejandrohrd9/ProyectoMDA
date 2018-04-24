@@ -4,6 +4,7 @@
     Author     : Cristian
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="Db.ThemeManagement"%>
 <%@page import="com.mycompany.tutordocs.User"%>
 <%@page import="Db.DatabaseConnection"%>
@@ -20,6 +21,9 @@
         <title>Tablón de Anuncios</title>
     </head>
     <body>
+        <%
+            User userSession = (User) session.getAttribute("user");
+        %>
         <nav class="navbar navbar-light navbar__user fixed-top">
             <a class="navbar-brand" href="#">
                 <img src="../images/logo_inverse.png"  class="d-inline-block align-top" alt="">
@@ -60,22 +64,31 @@
                         out.println(request.getParameter("name"));
                         //Buscar idtheme, por lo que deberia hacerlo en la url de boards
                         %></h3>
+                    <%
+                        int idtheme = Integer.parseInt(request.getParameter("idtheme"));
+                        List<Message> messages = ThemeManagement.getMessagesByTheme(idtheme);
+                        for (Message message : messages) {
+                    %>
                     <div class="jumbotron">
                         <%
-                            int idtheme = Integer.parseInt(request.getParameter("idtheme"));
-                            List<Message> messages = ThemeManagement.getMessagesByTheme(idtheme);
-//                            List<Message> messages = new ArrayList<Message>();
-                            for (Message message : messages) {
+                            out.println(message.getData());
+                            out.println(message.getCreatetAt());
+                            User user = DatabaseConnection.getUser(message.getIdCreator());
+                            out.println(user.username());
+                            out.println(message.getIdCreator());
+                            if (message.getIdCreator() == userSession.id()) {
                         %>
-
+                        <form action="../RemoveMessageServlet"> 
+                            <input type="hidden" name="idmessage" value="<%out.print(message.getIdMessage());%>">
+                            <input type="submit"  value="Eliminar">
+                        </form>       
                         <%
-                                out.println(message.getData());
-                                out.println(message.getCreatetAt());
-                                User user = DatabaseConnection.getUser(message.getIdCreator());
-                                out.println(user.username());
                             }
                         %>
-                    </div>
+                    </div> 
+                    <%
+                        }
+                    %>
                     <form action="../AddMessageServlet">
                         <textarea name="textMessage"></textarea>  
                         <input type="hidden" name="idtheme" value="<%out.print(request.getParameter("idtheme"));%>">

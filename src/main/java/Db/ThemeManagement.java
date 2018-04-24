@@ -32,7 +32,7 @@ public class ThemeManagement {
 
         ResultSet result = preparedStmt.executeQuery();
         while (result.next()) {
-            messages.add(new Message(result.getInt("idtheme"),
+            messages.add(new Message(result.getInt("idmessages"),result.getInt("idtheme"),
                     result.getString("data"), result.getLong("createdAt"),
                     result.getInt("iduser")));
         }
