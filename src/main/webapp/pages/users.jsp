@@ -35,9 +35,9 @@
                     <div class="col-md-2 col-sm-3 d-none d-sm-block sidebar">
                         <div class="user__card">
                             <div>
-                                <img class="user__card__img" src="../images/person1.jpg">
+                                <img src="<%=user.getImage()%>" class="img-responsive rounded-circle" alt="Profile image" style="margin-top: 5px; object-fit: cover; width:65px; height:65px;">
                             </div>
-                            <div class="user__card__nameuser"><%=user.username()%></div>
+                            <div class="user__card__nameuser"><a href="userProfile.jsp"><%=user.username()%></a></div>
                         </div>
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item">

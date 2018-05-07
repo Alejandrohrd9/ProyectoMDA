@@ -19,11 +19,14 @@ public class Group {
     private int id;
     private String name;
     private List<Integer> memberIds;
+    private String description;
     
-    public Group(int id, String name) {
+    public Group(int id, String name,String description) {
         this.id = id;
         this.name = name;
+        this.description = description;
         memberIds = new ArrayList<>();
+        
     }
     
     public List<String> getMembers() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
@@ -51,6 +54,10 @@ public class Group {
     
     public String name(){
         return name;
+    }
+    
+    public String description(){
+        return description;
     }
     
 }

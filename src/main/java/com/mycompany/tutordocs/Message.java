@@ -14,9 +14,11 @@ public class Message {
     private int idTheeme;
     private long createtAt;
     private int idCreator;
+    private int idMessage;
     private String data;
 
-    public Message(int idTheeme, String data, long createtAt,int idCreator) {
+    public Message(int idMessage,int idTheeme, String data, long createtAt,int idCreator) {
+        this.idMessage = idMessage;
         this.idTheeme = idTheeme;
         this.data = data;
         this.createtAt = createtAt;
@@ -29,6 +31,14 @@ public class Message {
 
     public void setIdTheeme(int idTheeme) {
         this.idTheeme = idTheeme;
+    }
+
+    public int getIdMessage() {
+        return idMessage;
+    }
+
+    public void setIdMessage(int idMessage) {
+        this.idMessage = idMessage;
     }
 
     public long getCreatetAt() {

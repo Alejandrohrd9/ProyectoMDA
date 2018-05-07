@@ -1,11 +1,10 @@
-
 package Servlets;
 
 import Db.ApuntesManagement;
 import Db.Dropbox;
+import Db.ExcercisesManagement;
 import com.dropbox.core.DbxException;
 import java.io.IOException;
-import static java.lang.System.out;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -41,15 +40,14 @@ public class DropboxServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, DbxException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        String contentype = request.getContentType();
         String path = null;
+        String excerciseName = null;
+        String redirect = "";
 
         boolean isMultipartContent = ServletFileUpload.isMultipartContent(request);
         if (!isMultipartContent) {
-            out.println("You are not trying to upload<br/>");
             return;
         }
-        out.println("You are trying to upload<br/>");
 
         FileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
@@ -64,27 +62,63 @@ public class DropboxServlet extends HttpServlet {
 
                 boolean isFormField = fileItem.isFormField();
                 if (isFormField) {
-                    path = "/" + fileItem.getString() + "/";
-                    path = path.replace(" ", "_");
+
+                    if (fileItem.getFieldName().equals("groupName")) {
+                        path = fileItem.getString();
+                        path = path.replace(" ", "_");
+                    } else {
+                        if (fileItem.getFieldName().equals("excerciseName")) {
+                            excerciseName = fileItem.getString();
+                            excerciseName = excerciseName.replace(" ", "_");
+                        }
+                    }
                 } else {
                     Dropbox dp = new Dropbox();
-                    dp.insertFile(path + fileItem.getName(),
-                            fileItem.getInputStream(), request, response);
-                    
-                    ApuntesManagement.insertApunte(Integer.parseInt(request.getParameter("groupId")), Integer.parseInt(request.getParameter("userId")), path + fileItem.getName(), fileItem.getName());
-                    
-                    String s = fileItem.getString();
-                    String name = fileItem.getName();
-                    String content = fileItem.getContentType();
-                    long size = fileItem.getSize();
-                    String toString = fileItem.toString();
+                    String s = fileItem.getName();
+
+                    if (request.getParameter("uploadExcercise") == null) {
+                        redirect = "groupView.jsp?id="+request.getParameter("groupId")+"&groupName="+path.substring(0,path.length());
+                        path = "/" + path + "/" + s;
+                        dp.insertFile(path, fileItem.getInputStream(), request, response);
+                        ApuntesManagement.insertApunte(Integer.parseInt(request.getParameter("groupId")), Integer.parseInt(request.getParameter("userId")),
+                                path, fileItem.getName(), dp.generateUrl(path));
+                    } else {
+                        if (request.getParameter("updateExcercise") != null) {
+                            redirect = "excercises.jsp?idExcerciseFolder="+request.getParameter("idExcerciseFolder")+
+                                        "&userId="+request.getParameter("userId")+
+                                        "&excercise="+request.getParameter("excercise")+
+                                        "&path="+path.substring(0,path.lastIndexOf("/")+1)+
+                                        "&groupId="+request.getParameter("groupId");
+                            dp.deleteFile("/"+path+"/"+request.getParameter("tarea"));
+                            path = "/" + path + "/" + s;
+                            dp.insertFile(path, fileItem.getInputStream(), request, response);
+                            ExcercisesManagement.updateExcercise(dp.generateUrl(path), Integer.parseInt(request.getParameter("idExcerciseFolder")), " ", " ", Integer.parseInt(request.getParameter("userId")));
+                        } else {
+                            if (request.getParameter("createExcercise") == null) {
+                                redirect = "excercises.jsp?idExcerciseFolder="+request.getParameter("idExcerciseFolder")+
+                                        "&userId="+request.getParameter("userId")+
+                                        "&excercise="+request.getParameter("excerciseName")+
+                                        "&path="+path.substring(0,path.lastIndexOf("/")+1)+
+                                        "&groupId="+request.getParameter("groupId");
+                                path = "/" + path + "/" + s;
+                                dp.insertFile(path, fileItem.getInputStream(), request, response);
+                                ExcercisesManagement.insertExcercise(dp.generateUrl(path), Integer.parseInt(request.getParameter("idExcerciseFolder")), " ", " ", Integer.parseInt(request.getParameter("userId")));
+                            } else {
+                                redirect = "groupView.jsp?id="+request.getParameter("groupId")+"&groupName="+path.substring(0,path.length()-1);
+                                dp.createFolder(path + "/" + excerciseName);
+                                path = "/" + path + "/"  + excerciseName + "/" + s;
+                                dp.insertFile(path, fileItem.getInputStream(), request, response);
+                                ExcercisesManagement.insertExcerciseFolder(excerciseName, dp.generateUrl(path),
+                                        Integer.parseInt(request.getParameter("groupId")), Integer.parseInt(request.getParameter("userId")));
+                            }
+                        }
+                    }
                 }
             }
         } catch (FileUploadException e) {
         }
 
-
-        response.sendRedirect("pages/users_group.jsp");
+        response.sendRedirect(redirect);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

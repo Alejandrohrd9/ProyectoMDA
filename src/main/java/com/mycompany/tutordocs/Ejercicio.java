@@ -1,50 +1,39 @@
 package com.mycompany.tutordocs;
 
-/**
- *
- * @author nacho
- */
 public class Ejercicio {
-    private int id, id_cuestionario, correct;
-    private String pregunta, optionOne, optionTwo, optionThree;
 
-    public Ejercicio(int id, int id_cuestionario, int correct, String pregunta, String optionOne, String optionTwo, String optionThree) {
+    private final int id, idExcercisesFolder, idUser;
+    private final String calification, comments, link;
+
+    public Ejercicio(int id, String link,int idExcercisesFolder, String calification, String comments, int idUser) {
         this.id = id;
-        this.id_cuestionario = id_cuestionario;
-        this.correct = correct;
-        this.pregunta = pregunta;
-        this.optionOne = optionOne;
-        this.optionTwo = optionTwo;
-        this.optionThree = optionThree;
+        this.idExcercisesFolder = idExcercisesFolder;
+        this.calification= calification;
+        this.comments= comments;
+        this.idUser= idUser;
+        this.link= link;
     }
 
     public int getId() {
         return id;
     }
-
-    public int getId_cuestionario() {
-        return id_cuestionario;
+    
+    public String getLink() {
+        return link;
     }
 
-    public int getCorrect() {
-        return correct;
+    public int getIdExcercisesFolder() {
+        return idExcercisesFolder;
     }
-
-    public String getPregunta() {
-        return pregunta;
-    }
-
-    public String getOptionOne() {
-        return optionOne;
-    }
-
-    public String getOptionTwo() {
-        return optionTwo;
-    }
-
-    public String getOptionThree() {
-        return optionThree;
+    public String getCalification() {
+        return calification;
     }
     
+    public String getComments() {
+        return comments;
+    }
     
+    public int getIdUser() {
+        return idUser;
+    }
 }

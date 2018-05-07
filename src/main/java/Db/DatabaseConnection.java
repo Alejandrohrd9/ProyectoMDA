@@ -1,7 +1,6 @@
 package Db;
 
 import com.mycompany.tutordocs.User;
-import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -33,11 +32,28 @@ public class DatabaseConnection {
         User user = null;
 
         if (result.next()) {
-            user = new User(result.getString("name"), result.getString("surname"), result.getString("email"), result.getString("usertype"), result.getString("username"), result.getString("password"), id);
+            user = new User(result.getString("name"), result.getString("surname"), result.getString("email"), result.getString("usertype"), result.getString("username"), result.getString("password"), id, result.getString("image"));
+            user.setImage(result.getString("image"));
         }
 
         con.close();
         return user;
+    }
+    
+    public static void updateProfile(int id, String name, String username, String email, String image) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        con = connection();
+        String query = "update Users set name = ?, surname = ?, email = ?, image = ? WHERE idUsers = ? ";
+        
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setString(1, name);
+        preparedStmt.setString(2, username);
+        preparedStmt.setString(3, email);
+        preparedStmt.setString(4, image);
+        preparedStmt.setInt(5, id);
+
+        preparedStmt.executeUpdate();
+
+        con.close();
     }
 
     public static String getUsername(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -116,6 +132,26 @@ public class DatabaseConnection {
             Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    public static User getUserInfo(String name) throws ClassNotFoundException, InstantiationException, SQLException, IllegalAccessException{
+
+        int id = getId(name);
+        
+        con = DatabaseConnection.connection();
+        
+        String query = "select * from Users WHERE idUsers = ?";
+
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, id);
+        
+        ResultSet result = preparedStmt.executeQuery();
+        User user = null;
+        if (result.next()) {
+                user = new User(result.getString("name"), result.getString("surname"), result.getString("email"), result.getString("usertype"), result.getString("username"), "", id, result.getString("image"));
+        }
+        con.close();
+        return user;
     }
 
 }

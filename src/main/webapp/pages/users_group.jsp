@@ -14,6 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
         <link rel="stylesheet" href="../css/main.css">
 
         <title>Grupos</title>
@@ -26,9 +27,6 @@
             <a class="navbar-brand" href="#">
                 <img src="../images/logo_inverse.png"  class="d-inline-block align-top" alt="">
             </a>
-            <div>
-
-            </div>
         </nav>
         <div class="container container_user">
             <div class="row">
@@ -36,9 +34,9 @@
                     <div class="col-md-2 col-sm-3 d-none d-sm-block sidebar">
                         <div class="user__card">
                             <div>
-                                <img class="user__card__img" src="../images/person1.jpg">
+                                <img src="<%=user.getImage()%>" class="img-responsive rounded-circle" alt="Profile image" style="margin-top: 5px; object-fit: cover; width:65px; height:65px;">
                             </div>
-                            <div class="user__card__nameuser"><%=user.username()%></div>
+                            <div class="user__card__nameuser"><a href="userProfile.jsp"><%=user.username()%></a></div>
                         </div>
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item">
@@ -63,11 +61,13 @@
                         for (Group group : groups) {%>
                     <div class="jumbotron">
                         <% if (group.isMember(user)) {%>
-                        <h3><a href="../groupView.jsp?id=<%=group.id()%>&groupName=<%=group.name()%>"><%=group.name()%></a></h3>
+                        <h3><a href="../groupView.jsp?id=<%=group.id()%>&groupName=<%=group.name()%>&groupDescription=<%=group.description()%>"><%=group.name()%></a></h3>
                             <%} else {%>
                         <h3 ><%=group.name()%></h3>
                         <%}%>
-                        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                        <p class="lead">
+                            <%=group.description()%>
+                        </p>
                         <% if (!group.isMember(user)) {%>
                         <form action="../RegisterInGroup">
                             <div class="form-group row">

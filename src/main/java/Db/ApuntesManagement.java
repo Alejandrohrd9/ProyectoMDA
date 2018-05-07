@@ -26,16 +26,17 @@ public class ApuntesManagement {
         return con;
     }
     
-    public static void insertApunte(int group_id, int user_id, String url, String title) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+    public static void insertApunte(int group_id, int user_id, String url, String title, String link) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         con = DatabaseConnection.connection();
         
-        String query = "insert into Apuntes (group_id, user_id, url, title) values (?,?,?,?)";
+        String query = "insert into Apuntes (group_id, user_id, url, title, link) values (?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(query);
 
         ps.setInt(1, group_id);
         ps.setInt(2, user_id);
         ps.setString(3, url);
         ps.setString(4, title);
+        ps.setString(5, link);
 
         ps.execute();
         
@@ -53,7 +54,7 @@ public class ApuntesManagement {
         ResultSet rs = preparedStmt.executeQuery();
 
         while (rs.next()) {
-            apuntes.add(new Apuntes(rs.getTimestamp("date"), rs.getInt("id"), rs.getInt("group_id"), rs.getInt("user_id"), rs.getString("tema"), rs.getString("url"), rs.getString("title")));
+            apuntes.add(new Apuntes(rs.getTimestamp("date"), rs.getInt("id"), rs.getInt("group_id"), rs.getInt("user_id"), rs.getString("tema"), rs.getString("url"), rs.getString("title"), rs.getString("link")));
         }
 
         con.close();

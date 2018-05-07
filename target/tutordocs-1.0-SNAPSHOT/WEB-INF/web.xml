@@ -12,6 +12,50 @@
         <servlet-name>CreateGroup</servlet-name>
         <servlet-class>Servlets.CreateGroup</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateProfile</servlet-name>
+        <servlet-class>Servlets.UpdateProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateHilo</servlet-name>
+        <servlet-class>Servlets.CreateHilo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteHilo</servlet-name>
+        <servlet-class>Servlets.DeleteHilo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletePost</servlet-name>
+        <servlet-class>Servlets.DeletePost</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateGroup</servlet-name>
+        <servlet-class>Servlets.UpdateGroup</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveMessageServlet</servlet-name>
+        <servlet-class>Servlets.RemoveMessageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddCorrectionServlet</servlet-name>
+        <servlet-class>Servlets.AddCorrectionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateMessageServlet</servlet-name>
+        <servlet-class>Servlets.UpdateMessageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateMensajeForo</servlet-name>
+        <servlet-class>Servlets.CreateMensajeForo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FinishTestServlet</servlet-name>
+        <servlet-class>Servlets.FinishTestServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuestionServlet</servlet-name>
+        <servlet-class>Servlets.QuestionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -31,6 +75,50 @@
     <servlet-mapping>
         <servlet-name>CreateGroup</servlet-name>
         <url-pattern>/CreateGroup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProfile</servlet-name>
+        <url-pattern>/UpdateProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateHilo</servlet-name>
+        <url-pattern>/CreateHilo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteHilo</servlet-name>
+        <url-pattern>/DeleteHilo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePost</servlet-name>
+        <url-pattern>/DeletePost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateGroup</servlet-name>
+        <url-pattern>/UpdateGroup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveMessageServlet</servlet-name>
+        <url-pattern>/RemoveMessageServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCorrectionServlet</servlet-name>
+        <url-pattern>/AddCorrectionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateMessageServlet</servlet-name>
+        <url-pattern>/UpdateMessageServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateMensajeForo</servlet-name>
+        <url-pattern>/CreateMensajeForo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FinishTestServlet</servlet-name>
+        <url-pattern>/FinishTestServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuestionServlet</servlet-name>
+        <url-pattern>/QuestionServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

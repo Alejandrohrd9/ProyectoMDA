@@ -5,8 +5,11 @@ import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.CreateFolderResult;
 import com.dropbox.core.v2.files.DbxUserFilesRequests;
 import com.dropbox.core.v2.files.DeleteResult;
+import com.dropbox.core.v2.files.DownloadBuilder;
 import com.dropbox.core.v2.files.FileMetadata;
 import com.dropbox.core.v2.files.UploadBuilder;
+import com.dropbox.core.v2.sharing.SharedFileMetadata;
+import com.dropbox.core.v2.sharing.SharedLinkMetadata;
 import java.io.*;
 import java.util.Locale;
 
@@ -19,7 +22,7 @@ public class Dropbox {
     private DbxRequestConfig config;
     private DbxClientV2 client;
 
-    public Dropbox(){
+    public Dropbox() {
         final String APP_KEY = "6c74lyouvx9b2zm";
         final String APP_SECRET = "jat1ftoil9pw3l1";
         DbxAppInfo appInfo = new DbxAppInfo(APP_KEY, APP_SECRET);
@@ -31,16 +34,34 @@ public class Dropbox {
 
         DbxUserFilesRequests files = client.files();
         UploadBuilder up = files.uploadBuilder(name);
+
         FileMetadata metadata = up.uploadAndFinish(in);
     }
 
     public void createFolder(String name) throws DbxException {
         DbxUserFilesRequests files = client.files();
-        CreateFolderResult up = files.createFolderV2("/"+name);
+        CreateFolderResult up = files.createFolderV2("/" + name);
     }
 
     public void deleteFile(String urlPath) throws DbxException {
         DbxUserFilesRequests files = client.files();
         DeleteResult deleteRes = files.deleteV2(urlPath);
+    }
+
+    public String generateUrl(String path) throws DbxException, FileNotFoundException, IOException {
+        DbxUserFilesRequests files = client.files();
+        SharedLinkMetadata m = client.sharing().createSharedLinkWithSettings(path);
+        DownloadBuilder dl = files.downloadBuilder(path);
+        
+        return m.getUrl().replace("?dl=0", "?dl=1");
+    }
+    
+    public FileMetadata download(String path) throws FileNotFoundException, DbxException, IOException{
+        //FileOutputStream fOut = new FileOutputStream("/Users/Yisus95/Downloads/aqui.pdf");
+
+        //FileOutputStream downloadFile = new FileOutputStream("/Users/Yisus95/Downloads/aqui2.pdf");
+        FileMetadata metadata = client.files().downloadBuilder(path).start().getResult();
+        //downloadFile.close();
+        return metadata;
     }
 }

@@ -47,7 +47,7 @@ public class GroupsManagement {
         Group group = null;
         
         if(result.next()){
-            group = new Group(id, result.getString("Nombre"));
+            group = new Group(id, result.getString("Nombre"),result.getString("Descripcion"));
         }
         
         con.close();
@@ -78,7 +78,7 @@ public class GroupsManagement {
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(query);
         while (rs.next()) {
-            groups.add(new Group(rs.getInt("idGroup"), rs.getString("Nombre")));
+            groups.add(new Group(rs.getInt("idGroup"), rs.getString("Nombre"), rs.getString("Descripcion")));
         }
         
         con.close();
@@ -128,14 +128,15 @@ public class GroupsManagement {
         con.close();
     }
     
-    public static void updateGroupName(String name, String id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public static void updateGroupName(String name, int id, String description) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         try {
             con = DatabaseConnection.connection();
 
-            String query = "UPDATE Groups SET Nombre = ? WHERE idGroup = ?";
+            String query = "UPDATE Groups SET Nombre = ?, Descripcion = ? WHERE idGroup = ?";
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, name);
-            preparedStmt.setString(2, id);
+            preparedStmt.setString(2, description);
+            preparedStmt.setInt(3, id);
             preparedStmt.executeUpdate();
             con.close();
         } catch (SQLException e) {
@@ -153,6 +154,20 @@ public class GroupsManagement {
         con.close();
     }
     
+    public static String getType(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        con = DatabaseConnection.connection();
+        String type = "";
+        String query = "select * from users where usertype = ?";
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setInt(1, id);
+        ResultSet result = preparedStmt.executeQuery();
+        while (result.next()) {
+            type = result.getString("usertype");
+        }
+
+        con.close();
+        return type;
+    }
 
     
 }

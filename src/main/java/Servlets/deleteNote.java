@@ -39,7 +39,7 @@ public class deleteNote extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ApuntesManagement a = new ApuntesManagement();
         a.deleteApunte(Integer.parseInt(request.getParameter("id")));
-        response.sendRedirect("groups.jsp");
+        response.sendRedirect("pages/users_group.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

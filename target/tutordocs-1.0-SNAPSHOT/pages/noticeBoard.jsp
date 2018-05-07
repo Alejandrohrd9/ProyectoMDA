@@ -56,10 +56,15 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-7">
                     <h3>Tablón de Anuncios</h3>
+                    <%  
+                        User userSession = (User) session.getAttribute("user");
+                    %>
                     <form action="../AddThemeServlet">
                         <input type="text" name="theme">
                         <input class="btn btn-primary" type="submit" value="Crear tema"/>
                     </form>
+                    <%
+                    %>
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
@@ -93,3 +98,4 @@
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>
+

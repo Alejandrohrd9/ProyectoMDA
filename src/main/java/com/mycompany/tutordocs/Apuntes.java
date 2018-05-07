@@ -11,9 +11,9 @@ import java.text.SimpleDateFormat;
 public class Apuntes {
     private Timestamp date;
     private int id, group_id, user_id;
-    private String tema, url, title;
+    private String tema, url, title, link;
 
-    public Apuntes(Timestamp date, int id, int group_id, int user_id, String tema, String url, String title) {
+    public Apuntes(Timestamp date, int id, int group_id, int user_id, String tema, String url, String title, String link) {
         this.date = date;
         this.id = id;
         this.group_id = group_id;
@@ -21,6 +21,8 @@ public class Apuntes {
         this.tema = tema;
         this.url = url;
         this.title = title;
+        this.link = link;
+        
     }
     
     public String getTitle(){
@@ -49,6 +51,10 @@ public class Apuntes {
 
     public String getUrl() {
         return url;
+    }
+    
+    public String getLink() {
+        return link;
     }
     
     
