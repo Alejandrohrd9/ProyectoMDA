@@ -70,7 +70,7 @@
                     <h4>Apuntes</h4>
                     <ul class="list-group">
                         <%for (Apuntes apunte : ApuntesManagement.getApuntesFromGroup(group.id())) {%>
-                        <li class="list-group-item"><%=apunte.getTitle()%> - <%=apunte.getDate()%></li>
+                        <li class="list-group-item"><a href="<%=apunte.getLink()%>"><%=apunte.getTitle()%></a> - <%=apunte.getDate()%></li>
 
                         <form action="DeleteNote">
                             <input type="hidden" name="id" value="<%=apunte.getId()%>">
