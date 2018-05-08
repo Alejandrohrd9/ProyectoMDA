@@ -45,9 +45,9 @@
                     <div class="col-md-2 col-sm-3 sidebar">
                         <div class="user__card">
                             <div>
-                                <img class="user__card__img" src="images/person1.jpg">
+                                <img src="<%=user.getImage()%>" class="img-responsive rounded-circle" alt="Profile image" style="margin-top: 5px; object-fit: cover; width:65px; height:65px;">
                             </div>
-                            <div class="user__card__nameuser"></div>
+                            <div class="user__card__nameuser"><a href="pages/userProfile.jsp"><%=user.username()%></a></div>
                         </div>
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item">
@@ -57,10 +57,10 @@
                                 <a class="nav-link" href="users_group.jsp">Grupos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Analytics</a>
+                                <a class="nav-link" href="pages/noticeBoard.jsp">Tablón</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Cerrar Sesion</a>
+                                <a class="nav-link" href="../LogOutServlet">Cerrar Sesion</a>
                             </li>
                         </ul>
                     </div>               
@@ -82,12 +82,12 @@
                     <button id="buttonUpload" type="button" class="btn btn-outline-primary m-2" onclick="displayUpload()">Subir archivo</button>
                     <div style="display: none" id="uploadDiv" class="mb-2">
                         <form action="DropboxServlet?userId=<%=user.id()%>&groupId=<%=request.getParameter("id")%>" enctype="multipart/form-data" method="post">
-                        <input type="hidden" name="groupName" value="<%=request.getParameter("groupName")%>" class="m-2">
+                            <input type="hidden" name="groupName" value="<%=request.getParameter("groupName")%>" class="m-2">
                             <input type="file" required="required" name="file" id="file"class="btn btn-outline-dark m-2"/>
                             <button type="submit" value="Upload" class="btn btn-outline-dark m-2"/>Subir</button>
                         </form>
                     </div>       
-                                        <h4>Cuestionarios</h4>
+                    <h4>Cuestionarios</h4>
                     <ul class="list-group">
                         <%if (user.typeUser().equals("Profesor")) {%>
                         <form action="pages/createQuestionnaire.jsp">
@@ -106,7 +106,7 @@
                             <input type="submit" class="btn btn-danger" value="Comenzar cuestionario">
                         </form>
                         <%}
-                        }%>
+                            }%>
                     </ul>
 
                     <h4>Ejercicios</h4>
@@ -130,7 +130,7 @@
                     </ul>
 
                 </div>
-                    
+
                 <div class="col-3">
                     <h4>Miembros del grupo</h4>
                     <ul class="list-group">
