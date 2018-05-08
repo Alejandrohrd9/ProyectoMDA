@@ -60,7 +60,7 @@
                                 <a class="nav-link" href="pages/noticeBoard.jsp">Tablón</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../LogOutServlet">Cerrar Sesion</a>
+                                <a class="nav-link" href="LogOutServlet">Cerrar Sesion</a>
                             </li>
                         </ul>
                     </div>               

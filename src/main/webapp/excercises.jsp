@@ -23,6 +23,10 @@
     </head>
     <body>
 
+        <%
+            User user = (User) session.getAttribute("user");
+            %>
+        
         <nav class="navbar navbar-light navbar__user fixed-top">
             <a class="navbar-brand" href="#">
                 <img src="images/logo_inverse.png"  class="d-inline-block align-top" alt="">
@@ -37,9 +41,9 @@
                     <div class="col-md-2 col-sm-3 d-none d-sm-block sidebar">
                         <div class="user__card">
                             <div>
-                                <img class="user__card__img" src="images/person1.jpg">
+                                <img src="<%=user.getImage()%>" class="img-responsive rounded-circle" alt="Profile image" style="margin-top: 5px; object-fit: cover; width:65px; height:65px;">
                             </div>
-                            <div class="user__card__nameuser"></div>
+                            <div class="user__card__nameuser"><a href="pages/userProfile.jsp"><%=user.username()%></a></div>
                         </div>
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item">
@@ -49,10 +53,10 @@
                                 <a class="nav-link" href="users_group.jsp">Grupos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Analytics</a>
+                                <a class="nav-link" href="pages/noticeBoard.jsp">Tablón</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Cerrar Sesion</a>
+                                <a class="nav-link" href="LogOutServlet">Cerrar Sesion</a>
                             </li>
                         </ul>
                     </div>               
@@ -61,7 +65,7 @@
         </div>
 
         <%
-            User user = (User) session.getAttribute("user");
+            
 
             String path = (String) request.getParameter("path");
 
