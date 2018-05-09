@@ -17,7 +17,40 @@
     </head>
     <body>
         <% User user = (User) request.getSession().getAttribute("user");%>
-        <div class="container">
+        <nav class="navbar navbar-light navbar__user fixed-top">
+            <a class="navbar-brand" href="#">
+                <img src="../images/logo_inverse.png"  class="d-inline-block align-top" alt="">
+                <link rel="stylesheet" href="../css/main.css">
+            </a>
+
+        </nav>
+        <div class="container-fluid container_user">
+            <div class="row align-items-start">
+                <div class="col-2">
+                    <div class="col-md-2 col-sm-3 sidebar">
+                        <div class="user__card">
+                            <div>
+                                <img src="<%=user.getImage()%>" class="img-responsive rounded-circle" alt="Profile image" style="margin-top: 5px; object-fit: cover; width:65px; height:65px;">
+                            </div>
+                            <div class="user__card__nameuser"><a href="pages/userProfile.jsp"><%=user.username()%></a></div>
+                        </div>
+                        <ul class="nav nav-pills flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="../users.jsp">Cursos<span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="users_group.jsp">Grupos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="noticeBoard.jsp">Tablón</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../LogOutServlet">Cerrar Sesion</a>
+                            </li>
+                        </ul>
+                    </div>               
+                </div>
+        <div class="container col-10">
             <h3><%=request.getParameter("name")%></h3>
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#postModal">
                 Nuevo mensaje
@@ -43,6 +76,8 @@
                 }%>
             <hr>
             <a href="forum_display.jsp?id=<%=Integer.parseInt(request.getParameter("groupid"))%>">Volver</a>
+        </div>    
+        </div>    
         </div>    
         
         <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalCenterTitle" aria-hidden="true">

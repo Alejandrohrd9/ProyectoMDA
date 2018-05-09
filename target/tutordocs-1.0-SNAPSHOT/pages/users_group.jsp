@@ -84,9 +84,8 @@
                         <div class="form-group">
                             <h3>Crear grupo</h3>
                             <form action="../CreateGroup" method="get">
-                                <label for="groupName">Introduce el nombre del grupo</label><br>
                                 <input type="text" name="groupName" id="users" placeholder="Nombre del grupo"><br>
-                                <button type="submit" class="btn btn-primary">Enviar</button>
+                                <button type="submit" class="btn btn-primary mt-2">Enviar</button>
                             </form>
                         </div>
                     </div>

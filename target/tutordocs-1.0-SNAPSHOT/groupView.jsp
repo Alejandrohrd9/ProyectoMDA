@@ -51,10 +51,10 @@
                         </div>
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="users.jsp">Cursos<span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="pages/users.jsp">Cursos<span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="users_group.jsp">Grupos</a>
+                                <a class="nav-link" href="pages/users_group.jsp">Grupos</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="pages/noticeBoard.jsp">Tablón</a>
@@ -79,7 +79,7 @@
                         <%}%>
                     </ul>
 
-                    <button id="buttonUpload" type="button" class="btn btn-outline-primary m-2" onclick="displayUpload()">Subir archivo</button>
+                    <button id="buttonUpload" type="button" class="btn btn-primary mt-2" onclick="displayUpload()">Subir archivo</button>
                     <div style="display: none" id="uploadDiv" class="mb-2">
                         <form action="DropboxServlet?userId=<%=user.id()%>&groupId=<%=request.getParameter("id")%>" enctype="multipart/form-data" method="post">
                             <input type="hidden" name="groupName" value="<%=request.getParameter("groupName")%>" class="m-2">
@@ -88,65 +88,72 @@
                         </form>
                     </div>       
                     <h4>Cuestionarios</h4>
-                    <ul class="list-group">
-                        <%if (user.typeUser().equals("Profesor")) {%>
-                        <form action="pages/createQuestionnaire.jsp">
-                            <div class="form-group row">
-                                <input type="hidden" name="group" value="<%=group.id()%>">
-                                <button type="submit" class="btn btn-primary">Crear cuestionario</button>
-                            </div>
-                        </form>
-                        <%} else {%>
-                        <%for (Cuestionario cuestionario : CuestionariosManagement.getGroupCuestionarios(group.id())) {%>
-                        <li class="list-group-item"><%=cuestionario.getTitle()%> - <%=cuestionario.getDate()%></li>
-                        <form action="cuestionario.jsp">
-                            <input type="hidden" name="id" value="<%=request.getParameter("id")%>">
-                            <input type="hidden" name="idCuestionario" value="<%=cuestionario.getId()%>">
-                            <input type="hidden" name="titulo" value="<%=cuestionario.getTitle()%>">
-                            <input type="submit" class="btn btn-danger" value="Comenzar cuestionario">
-                        </form>
-                        <%}
-                            }%>
-                    </ul>
-
+                    <div class="container">
+                        <ul class="list-group">
+                            <%if (user.typeUser().equals("Profesor")) {%>
+                            <form action="pages/createQuestionnaire.jsp">
+                                <div class="form-group row">
+                                    <input type="hidden" name="group" value="<%=group.id()%>">
+                                    <button type="submit" class="btn btn-primary">Crear cuestionario</button>
+                                </div>
+                            </form>
+                            <%} else {%>
+                            <%for (Cuestionario cuestionario : CuestionariosManagement.getGroupCuestionarios(group.id())) {%>
+                            <li class="list-group-item"><%=cuestionario.getTitle()%> - <%=cuestionario.getDate()%></li>
+                            <form action="cuestionario.jsp">
+                                <input type="hidden" name="id" value="<%=request.getParameter("id")%>">
+                                <input type="hidden" name="idCuestionario" value="<%=cuestionario.getId()%>">
+                                <input type="hidden" name="titulo" value="<%=cuestionario.getTitle()%>">
+                                <input type="submit" class="btn btn-danger" value="Comenzar cuestionario">
+                            </form>
+                            <%}
+                                }%>
+                        </ul>
+                    </div>
                     <h4>Ejercicios</h4>
-                    <%
-                        if (user.getType().equals("Profesor")) {
-                    %>
-                    <form action="DropboxServlet?groupId=<%=group.id()%>&userId=<%=user.id()%>&uploadExcercise=true&createExcercise=true" enctype="multipart/form-data" method="post">
-                        <h1>Crear entrega</h1>
-                        <input type="hidden" name="groupName" value="<%=request.getParameter("groupName")%>/Ejercicios">
-                        Nombre de la carpeta: <input type = "text" name="excerciseName"><br>
-                        <input type="file" required="required" name="file" id="file"/><br/>
-                        <input type="submit" value="Upload" />
-                    </form>
-                    <%
-                        }
-                    %>
-                    <ul class="list-group">
-                        <%for (CarpetaEjercicio excercise : ExcercisesManagement.getExcercisesFolder(group.id())) {%>
-                        <a href="excercises.jsp?idExcerciseFolder=<%=excercise.getId()%>&userId=<%=user.id()%>&excercise=<%=excercise.getTitle()%>&path=<%=request.getParameter("groupName")%>/Ejercicios/&groupId=<%=group.id()%>"><li class="list-group-item"><%=excercise.getTitle()%></li></a>
-                                <%}%>
-                    </ul>
-
+                    <button id="buttonEjercicio" type="button" class="btn btn-primary mt-2" onclick="displayEjercicio()">Crear entrega</button>
+                    <div class="container mt-2" style="display: none" id="entregaDiv">
+                        <%
+                            if (user.getType().equals("Profesor")) {
+                        %>
+                        <form action="DropboxServlet?groupId=<%=group.id()%>&userId=<%=user.id()%>&uploadExcercise=true&createExcercise=true" enctype="multipart/form-data" method="post">
+                            <h4>Crear entrega</h4>
+                            <input type="hidden" name="groupName" value="<%=request.getParameter("groupName")%>/Ejercicios">
+                            Nombre de la carpeta: <input type = "text" name="excerciseName"><br>
+                            <input type="file" required="required" name="file" id="file"/><br/>
+                            <input type="submit" value="Upload" />
+                        </form>
+                        <%
+                            }
+                        %>
+                        <ul class="list-group">
+                            <%for (CarpetaEjercicio excercise : ExcercisesManagement.getExcercisesFolder(group.id())) {%>
+                            <a href="excercises.jsp?idExcerciseFolder=<%=excercise.getId()%>&userId=<%=user.id()%>&excercise=<%=excercise.getTitle()%>&path=<%=request.getParameter("groupName")%>/Ejercicios/&groupId=<%=group.id()%>"><li class="list-group-item"><%=excercise.getTitle()%></li></a>
+                                    <%}%>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="col-3">
-                    <h4>Miembros del grupo</h4>
-                    <ul class="list-group">
-                        <%for (String member : group.getMembers()) {%>
-                        <li class="list-group-item"><a href="pages/exploreProfile.jsp?target=<%=member%>"><%=member%></li>
-                            <%}%>
-                    </ul>
-                    <div class="p-1">
-                        <form action="DeleteGroup">
-                            <input type="hidden" name="group" value="<%=group.id()%>">
-                            <input type="hidden" name="user" value="<%=user.id()%>">
-                            <button type="submit" class="btn btn-danger">Salir del grupo</button>
-                        </form>
-                        <a role="button" class="btn btn-outline-primary mt-1" href="pages/forum_display.jsp?id=<%=group.id()%>">Foro del grupo
-                        </a>
-                    </div>
+
+                    <div class="w-75">
+                        <h4>Miembros del grupo</h4>
+                        <ul class="list-group">
+                            <%for (String member : group.getMembers()) {%>
+                            <li class="list-group-item"><a href="pages/exploreProfile.jsp?target=<%=member%>"><%=member%></li>
+                                <%}%>
+                        </ul>
+                        <div class="mt-2">
+                            <form action="DeleteGroup">
+                                <input type="hidden" name="group" value="<%=group.id()%>">
+                                <input type="hidden" name="user" value="<%=user.id()%>">
+                                <button type="submit" class="btn btn-outline-danger">Salir del grupo</button>
+                            </form>
+                            <a role="button" class="btn btn-outline-primary mt-1" href="pages/forum_display.jsp?id=<%=group.id()%>">Foro del grupo
+                            </a>
+                        </div>
+                    </div> 
+
                 </div>
             </div>
         </div>
@@ -169,5 +176,16 @@
                                 $('#buttonUpload').text("Subir archivo");
                             }
                         }
+                        
+                        function displayEjercicio() {
+                            jQuery('#entregaDiv').toggle();
+                            if ($('#buttonEjercicio').text() === "Crear entrega") {
+                                $('#buttonEjercicio').text("Cancelar");
+                            } else if ($('#buttonEjercicio').text() === "Cancelar") {
+                                $('#buttonEjercicio').text("Crear entrega");
+                            }
+                        }
+                        
+                        
     </script>    
 </html>

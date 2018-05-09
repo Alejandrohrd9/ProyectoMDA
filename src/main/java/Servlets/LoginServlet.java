@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session =  request.getSession();
             User user = DatabaseConnection.getUser(DatabaseConnection.getId(request.getParameter("user")));
             session.setAttribute("user",user);
-            response.sendRedirect("./pages/users.jsp");
+            response.sendRedirect("./pages/users_group.jsp");
         }else{
             response.sendRedirect("error.jsp");
         }
