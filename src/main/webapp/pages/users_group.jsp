@@ -60,13 +60,19 @@
                     <%
                         for (Group group : groups) {%>
                     <div class="jumbotron">
+                        <a href="editGroupInfo.jsp?id=<%=group.id()%>&groupName=<%=group.name()%>&groupDescription=<%=group.description()%>"><i class="fas fa-edit"></i></a>
                         <% if (group.isMember(user)) {%>
                         <h3><a href="../groupView.jsp?id=<%=group.id()%>&groupName=<%=group.name()%>&groupDescription=<%=group.description()%>"><%=group.name()%></a></h3>
                             <%} else {%>
                         <h3 ><%=group.name()%></h3>
                         <%}%>
                         <p class="lead">
+                            <%
+                                if (group.description() == null) {
+                            %>Sin descripcion<%
+                                    } else {%>
                             <%=group.description()%>
+                            <%}%>
                         </p>
                         <% if (!group.isMember(user)) {%>
                         <form action="../RegisterInGroup">
