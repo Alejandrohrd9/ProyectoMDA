@@ -72,7 +72,7 @@
                         <%for (Apuntes apunte : ApuntesManagement.getApuntesFromGroup(group.id())) {%>
                         <li class="list-group-item"><a href="<%=apunte.getLink()%>"><%=apunte.getTitle()%></a> - <%=apunte.getDate()%></li>
 
-                        <form action="DeleteNote">
+                        <form action="deleteNote">
                             <input type="hidden" name="id" value="<%=apunte.getId()%>">
                             <input type="submit" class="btn btn-danger" value="Borrar Apunte">
                         </form>
@@ -88,7 +88,7 @@
                         </form>
                     </div>       
                     <h4>Cuestionarios</h4>
-                    <div class="container">
+                    <div>
                         <ul class="list-group">
                             <%if (user.typeUser().equals("Profesor")) {%>
                             <form action="pages/createQuestionnaire.jsp">
@@ -111,11 +111,19 @@
                         </ul>
                     </div>
                     <h4>Ejercicios</h4>
-                    <button id="buttonEjercicio" type="button" class="btn btn-primary mt-2" onclick="displayEjercicio()">Crear entrega</button>
+                    <div class="mt-2">
+                        <ul class="list-group">
+                            <%for (CarpetaEjercicio excercise : ExcercisesManagement.getExcercisesFolder(group.id())) {%>
+                            <a href="excercises.jsp?idExcerciseFolder=<%=excercise.getId()%>&userId=<%=user.id()%>&excercise=<%=excercise.getTitle()%>&path=<%=request.getParameter("groupName")%>/Ejercicios/&groupId=<%=group.id()%>"><li class="list-group-item"><%=excercise.getTitle()%></li></a>
+                                    <%}%>
+                        </ul>
+                    </div>
+                    
                     <div class="container mt-2" style="display: none" id="entregaDiv">
                         <%
                             if (user.getType().equals("Profesor")) {
                         %>
+                        <button id="buttonEjercicio" type="button" class="btn btn-primary mt-2" onclick="displayEjercicio()">Crear entrega</button>
                         <form action="DropboxServlet?groupId=<%=group.id()%>&userId=<%=user.id()%>&uploadExcercise=true&createExcercise=true" enctype="multipart/form-data" method="post">
                             <h4>Crear entrega</h4>
                             <input type="hidden" name="groupName" value="<%=request.getParameter("groupName")%>/Ejercicios">
@@ -126,11 +134,7 @@
                         <%
                             }
                         %>
-                        <ul class="list-group">
-                            <%for (CarpetaEjercicio excercise : ExcercisesManagement.getExcercisesFolder(group.id())) {%>
-                            <a href="excercises.jsp?idExcerciseFolder=<%=excercise.getId()%>&userId=<%=user.id()%>&excercise=<%=excercise.getTitle()%>&path=<%=request.getParameter("groupName")%>/Ejercicios/&groupId=<%=group.id()%>"><li class="list-group-item"><%=excercise.getTitle()%></li></a>
-                                    <%}%>
-                        </ul>
+
                     </div>
                 </div>
 
@@ -176,7 +180,7 @@
                                 $('#buttonUpload').text("Subir archivo");
                             }
                         }
-                        
+
                         function displayEjercicio() {
                             jQuery('#entregaDiv').toggle();
                             if ($('#buttonEjercicio').text() === "Crear entrega") {
@@ -185,7 +189,7 @@
                                 $('#buttonEjercicio').text("Crear entrega");
                             }
                         }
-                        
-                        
+
+
     </script>    
 </html>
