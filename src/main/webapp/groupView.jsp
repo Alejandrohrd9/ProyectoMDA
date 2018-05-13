@@ -119,11 +119,12 @@
                         </ul>
                     </div>
                     
-                    <div class="container mt-2" style="display: none" id="entregaDiv">
+                    
                         <%
                             if (user.getType().equals("Profesor")) {
                         %>
                         <button id="buttonEjercicio" type="button" class="btn btn-primary mt-2" onclick="displayEjercicio()">Crear entrega</button>
+                        <div class="container mt-2" style="display: none" id="entregaDiv">
                         <form action="DropboxServlet?groupId=<%=group.id()%>&userId=<%=user.id()%>&uploadExcercise=true&createExcercise=true" enctype="multipart/form-data" method="post">
                             <h4>Crear entrega</h4>
                             <input type="hidden" name="groupName" value="<%=request.getParameter("groupName")%>/Ejercicios">
@@ -131,11 +132,12 @@
                             <input type="file" required="required" name="file" id="file"/><br/>
                             <input type="submit" value="Upload" />
                         </form>
+                            </div>
                         <%
                             }
                         %>
 
-                    </div>
+                    
                 </div>
 
                 <div class="col-3">
