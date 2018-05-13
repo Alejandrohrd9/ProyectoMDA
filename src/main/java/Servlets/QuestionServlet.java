@@ -61,7 +61,7 @@ public class QuestionServlet extends HttpServlet {
                     CuestionariosManagement.insertQuestion(request.getParameter("pregunta"), request.getParameter("r1"), request.getParameter("r2"), request.getParameter("r3"), Integer.parseInt(request.getParameter("exampleRadios1")), id, Integer.parseInt(request.getParameter("puntuacionP")));
                 }
                 //request.setAttribute("id", session.getAttribute("groupid"));
-                RequestDispatcher dispatch = request.getRequestDispatcher("groups.jsp");
+                RequestDispatcher dispatch = request.getRequestDispatcher("groupView.jsp?id="+session.getAttribute("groupid"));
                 if (dispatch != null) {
                     dispatch.forward(request, response);
                 }
@@ -71,7 +71,7 @@ public class QuestionServlet extends HttpServlet {
                 id = CuestionariosManagement.idQuestionnaire((String) request.getSession().getAttribute("nameQ"));
                 CuestionariosManagement.removeQuestion(id);
                 CuestionariosManagement.removeQuestionnaire(Integer.parseInt(id));
-                RequestDispatcher dispatch = request.getRequestDispatcher("groupView.jsp");
+                RequestDispatcher dispatch = request.getRequestDispatcher("groupView.jsp?id="+session.getAttribute("groupid"));
                 if (dispatch != null) {
                     dispatch.forward(request, response);
                 }
